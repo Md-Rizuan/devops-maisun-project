@@ -1,0 +1,244 @@
+.signup-form-container {
+    background: rgba(255, 255,255, 0.6);
+    padding: 30px 50px;
+    margin: 10px 50px;
+    border-radius: 2rem;
+    box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
+}
+
+.progress-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 93%;
+    margin: 20px 0;
+}
+
+
+.progress-line {
+    position: absolute;
+    bottom: -30px; 
+    left: 0;
+    right: 0;
+    height: 4px;
+    top: 30%;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background-color: #e0e0e0; 
+    z-index: 0; 
+    border-radius: 2px;
+}
+
+.progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background-color: rgb(122 199 148); 
+    border-radius: 2px;
+    transition: width 0.3s ease-in-out;
+}
+
+.step {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 50px;
+}
+.step-icon {
+    font-size: 24px;
+}
+
+.step .step-icon {
+    display: block;
+    background-color: #ddd;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    align-content: center;
+}
+.step.active .step-icon {
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(0, 0, 0, .7);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: block;
+    align-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, 
+    rgba(10, 200, 64, 0.5) 0px -2px 6px 0px inset;
+}
+.step.completed .step-icon {
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(0, 0, 0, .7);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: block;
+    align-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, 
+    rgba(10, 200, 64, 0.5) 0px -2px 6px 0px inset;
+}
+
+.step.active p{
+    color: #1b9650;
+}
+
+.step.completed p{
+    color: #1b9650;
+}
+
+.step p{
+    margin-top: 5px;
+    font-weight: bold;
+}
+.progress-bar {
+    background: #ddd;
+    height: 5px;
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.progress {
+    background: rgb(12 186 86);
+    height: 100%;
+    width: 25%; 
+}
+
+
+.form-step {
+    display: none;
+}
+.form-step.active {
+    display: block;
+}
+
+.btn-container{
+    display: flex;
+    justify-content: space-between;
+}
+.btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+ /* new css */
+ .button_tab_row{
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    border-radius: 1rem 1rem 0 0;
+    border: 1px solid #e2e8f0;
+}
+
+.tab_div{
+    align-items: center;
+    background: #fff;
+    border-radius: 0 0 1rem 1rem;
+    border: 1px solid #e2e8f0;
+    padding: 1.2rem;
+}
+
+.application_tab_link p{
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #595858;
+
+}
+.button_tab_row_child{
+    text-align: center;
+    padding: 0 !important;
+}
+.button_tab_row_child:not(:last-child){
+    border-right: 1px solid #e2e8f0;
+}
+.inner_card{
+    align-content: center;
+}
+.button_tab_row_child.active{
+    border-bottom: 3px solid rgb(147 147 147);
+    /* background-color: #f4f4ff; */
+    background-color: #fff1e7;
+}
+.button_tab_row_child.active:first-child{
+    border-radius: 1rem 0 0 0;
+}
+.button_tab_row_child.active:last-child{
+    border-radius: 0 1rem 0 0;
+}
+.button_tab_row_child.active .menu_title{
+    color:#000;
+}
+.data_div .title{
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: .2rem;
+}
+.data_div .data{
+    font-size: .9rem;
+    word-wrap: break-word;
+}
+
+.data_div .div_heading{
+    font-weight: 600;
+    padding: 1rem 0;
+    color: #000;
+    font-size: 1.5rem;
+}
+.form-label{
+    font-weight: 600;
+}
+.data_div .file-link{
+    color: rgb(25, 25, 144);
+}
+
+
+.btn-primary {
+    background-color: rgba(1, 146, 62, 1) !important;
+    border: none !important;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    color: #fff !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus, 
+.btn-primary:active {
+    background-color: rgba(1, 116, 50, 1) !important;
+}
+
+.btn-secondary {
+    background-color: rgba(127, 127, 127, 1) !important;
+    border: none !important;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    color: #fff !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,  
+.btn-secondary:active {
+    background-color: rgba(107, 107, 107, 1) !important;
+}
+
+.form-step .form-step-title{
+    color: rgba(0, 0, 0, .8);
+    font-weight: bold;
+}
+.form-check-input:checked {
+    background-color: rgba(1, 116, 50, 1);
+    border-color: rgba(1, 116, 50, 1);
+}
+
+.step-icon i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

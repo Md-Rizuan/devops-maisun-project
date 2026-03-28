@@ -1,0 +1,231 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+	Data Backup
+{% endblock %}
+
+{% block style %}
+    <style>
+        table.dataTable{
+            margin-top:0px !important;
+        }
+        
+        #for_datatable_info{
+            opacity:0;
+        }
+        
+        #for_datatable_wrapper .row{
+            width:100% !important;
+        }
+        
+        #for_datatable_wrapper .row, #for_datatable_wrapper .col-sm-12{
+            margin:0px;
+            padding:0px;
+        }
+        
+        .list_container, .top_holder{
+            width:96%;
+            height:auto;
+            margin-left:2%;
+            padding:14px;
+            padding-bottom:40px;
+        }
+        
+        .top_holder{
+            padding:0px;
+        }
+        
+        .list_container{
+            padding:0px;
+            min-height:55vh;
+        }
+        
+        .download-backup{
+            font-size: 16px;
+            padding: 4px 14px;
+        }
+        .btn-primary{
+            background-color:#185086 !important;
+            border-color: #185086 !important;
+        }
+        
+        /*
+            screen media
+        */
+        
+        @media only screen and (max-width: 1023px) {
+            .list_container, .top_holder{
+                width:98%;
+                margin-left:1%;
+            }
+        }		
+            
+        /*
+            screen
+        */
+        
+    </style>	
+{% endblock %}
+
+{% block main_content %}
+	
+	<div class="content_parent">
+        <div class="title_holder">
+            <div class="container-fluid"></div>
+        </div>
+        <div class="container-fluid">					
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="top_holder">
+                        {% comment %} <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h1 class="menu_heading">Data Backup
+                                </h1>
+                            </div>
+                        </div> {% endcomment %}
+                        <div class="row">
+                            <div class="col-lg-8 col-md-6 col-sm-12">
+                                {% if last_media_backup.time_taken %}    
+                                    <h5>
+                                        Last Media Backup taken on <span id="taken_on">{{ last_media_backup.time_taken }}</span>
+                                    </h5>
+                                {% endif %}
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="text-right">
+                                    <a href="{% url 'backup_log:new-media-backup' %}" target="_blank">
+                                        <button class="btn btn-primary add_category">
+                                           Take Media Backup
+                                        </button>
+                                    </a>
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8 col-md-6 col-sm-12">
+                                {% if last_backup.time_taken %}    
+                                    <h5>
+                                       Last backup taken on <span id="taken_on">{{ last_backup.time_taken  }}</span>
+                                    </h5>
+                                {% endif %}
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="text-right">
+                                    <button class="btn btn-primary add_category newbackup">
+                                        
+                                        Take Data Backup
+                                    </button>
+                                </div>
+                            </div>
+                        </div><br/>
+                    </div>
+                        
+                    </div>
+                    <div class="list_holder" style="margin: 0;">
+                        <table class="table table-hover table-striped category_table searcher_table" style="width: 100%;">
+                            <thead class='table-greenish'>
+                                <tr>
+                                    <th>File Name</th>
+                                    <th>Backup Taken</th>
+                                    <th style="text-align:center;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if backups  %}
+                                    {% for backup in backups %}
+                                        <tr>
+                                            <td>{{ backup.name }}</td>
+                                            <td>{{ backup.time_taken  }}</td>
+                                            <td style="text-align:center;">
+                                                <button class="btn btn-primary download-backup" data-name="{{ backup.name }}">
+                                                    Download
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr class='text-center'>
+                                        <td colspan="3"> No backup taken yet</td>
+                                    </tr>
+                            	{% endif %}
+                            </tbody>
+                        </table>
+                    </div>								
+                </div>
+                <div class="col-lg-12">
+                    {% if backups.has_other_pages %}
+                        <br/>
+                        <div style="position:relative;">
+                            <ul class="pagination" style="position:absolute;right:0px;">
+                                {% if backups.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{backups.previous_page_number}}" tabindex="-1">
+                                            &laquo;
+                                        </a>
+                                    </li>
+                                {% endif %}                                 
+                                {% for i in backups.paginator.page_range %}
+                                    {% if backups.number == i %}
+                                        <li class="page-item">
+                                            <a class="page-link active" href="#">{{i}} <span class="sr-only">(current)</span></a>
+                                        </li>
+                                    {% elif i > backups.number|add:'-3' and i < backups.number|add:'3' %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{i}}">
+                                                    {{i}}
+                                                </a>
+                                            </li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if backups.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{backups.next_page_number}}" tabindex="-1">
+                                            &raquo;
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <br/><br/><br/><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}	
+
+    <script>
+        $(document).ready(function(){
+
+            $('.nav-item[data-menu="data-backups"]').addClass("active");
+            $('.nav-item[data-slide="backup-menu"]').show();
+            $('.fa[data-icon="backup-menu"]').removeClass("fa-plus-circle").addClass("fa-minus-circle");
+        
+           
+
+            $(".newbackup").click(function(){
+                $.get("{% url 'backup_log:new-backup' %}", function(new_backup){
+                    new_backup = new_backup.replace("<html><head></head><body>","").replace("</body></html>","");
+                    new_backup = JSON.parse(new_backup);
+                    $("#taken_on").html(new_backup.time_taken);
+                    $(".searcher_table").children("tbody").prepend('<tr><td>'+new_backup.name+' (New)</td><td>'+new_backup.time_taken+'</td><td style="text-align:center;"><button class="btn btn-primary download-backup" data-name="'+new_backup.name+'">Download</button></td></tr>');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                });
+            });
+            
+            $(document).on('click', '.download-backup', function(){
+                const filename = $(this).data("name");
+                if(filename.length>0){
+                    window.location.href = "{% url 'backup_log:download-backup' %}?path="+filename;
+                }
+            }); 
+                
+        });
+    </script>
+
+{% endblock %}

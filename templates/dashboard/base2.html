@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}{% endblock %} | {{app_name}}</title>
+    <meta name="description" content="Education" />
+    <meta name="author" content="MidDayDreams" />
+    <meta property="og:title" content="">
+    <meta property="og:description" content="Education">
+    <meta property="og:type" content="Website">
+    <meta property="og:site_name" content="{{app_name}}">
+	<link rel="icon" type="image/png" href="{{static_server}}/images/logo_sm.png">
+    <link rel="stylesheet" href="{{static_server}}/fonts/bootstrap/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="{{static_server}}/css/main.min.css?v=2" />
+    <link rel="stylesheet" href="{{static_server}}/css/custom.css" />
+    <link rel="stylesheet" href="{{static_server}}/vendor/overlay-scroll/OverlayScrollbars.min.css" />
+	<link href="{{static_server}}/login-assets/css/notify.css" rel="stylesheet" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <!-- jQuery Confirm CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css">
+    <style>
+		
+        
+      
+    </style>
+	{% block style %}
+	
+	{% endblock %}
+    
+</head>
+
+<body>
+    <div  class="page-wrapper">
+        <div  class="main-container">
+            <nav  id="sidebar" class="sidebar-wrapper" style=''>
+                <div  class="app-brand px-3 my-2">
+                    <a  href="{% url 'dashboard:index' %}">
+						<img src="{{static_server}}/images/full_logo.png" class="logo side-logo" alt="{{app_name}}" />
+                    </a>
+                </div>
+                <div  class="sidebarMenuScroll" >
+                    <ul  class="sidebar-menu ">
+						<li class="parent-menu">
+							<a href="{% url 'dashboard:index' %}">
+								<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.623047 13.0399V0.574158H10.6307V13.0399H0.623047ZM0.623047 23.0475V15.5564H10.6307V23.0475H0.623047ZM13.0888 23.0475V10.5818H23.0964V23.0475H13.0888ZM13.0888 0.574158H23.0964V8.06529H13.0888V0.574158Z" fill="#165829"/>
+                                </svg>
+                                    
+								<span class="menu-text ps-1">Dashboard</span>
+							</a>
+						</li>
+						<li class="treeview setup_menu">
+							<a href="#!">
+								<svg width="20" height="20" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21.8244 10.0067L19.4124 9.28674C19.2456 8.70448 19.0163 8.14199 18.7284 7.60912L19.9092 5.3987C19.9535 5.31526 19.9697 5.21977 19.9555 5.12638C19.9412 5.03299 19.8972 4.94669 19.83 4.88029L18.1092 3.15228C18.0428 3.08508 17.9565 3.04108 17.8631 3.02681C17.7697 3.01255 17.6742 3.02877 17.5908 3.07308L15.3948 4.24669C14.8566 3.94476 14.2868 3.70329 13.6955 3.52668L12.9755 1.14346C12.9451 1.05563 12.8875 0.979727 12.8112 0.926679C12.7349 0.873631 12.6437 0.846172 12.5507 0.848255H10.1171C10.0236 0.84869 9.93268 0.878952 9.85757 0.934636C9.78246 0.990321 9.72709 1.06852 9.6995 1.15786L8.97949 3.53388C8.38333 3.70955 7.80859 3.95104 7.26587 4.25389L5.10585 3.08748C5.02242 3.04317 4.92692 3.02695 4.83353 3.04121C4.74014 3.05548 4.65385 3.09948 4.58745 3.16668L2.83783 4.87309C2.77063 4.93949 2.72663 5.02579 2.71237 5.11918C2.6981 5.21256 2.71432 5.30806 2.75863 5.3915L3.92504 7.55152C3.62268 8.09195 3.3812 8.66426 3.20503 9.25794L0.82181 9.97794C0.732474 10.0055 0.654273 10.0609 0.598589 10.136C0.542904 10.2111 0.512642 10.302 0.512207 10.3955V12.8292C0.512642 12.9227 0.542904 13.0136 0.598589 13.0887C0.654273 13.1638 0.732474 13.2192 0.82181 13.2468L3.21943 13.9668C3.39752 14.5506 3.63896 15.1131 3.93944 15.6444L2.75863 17.9052C2.71432 17.9887 2.6981 18.0842 2.71237 18.1775C2.72663 18.2709 2.77063 18.3572 2.83783 18.4236L4.55865 20.1444C4.62505 20.2116 4.71134 20.2556 4.80473 20.2699C4.89812 20.2842 4.99362 20.2679 5.07705 20.2236L7.30187 19.0356C7.82817 19.3196 8.38334 19.5465 8.95789 19.7124L9.6779 22.1389C9.70548 22.2282 9.76086 22.3064 9.83597 22.3621C9.91108 22.4178 10.002 22.448 10.0955 22.4485H12.5291C12.6226 22.448 12.7135 22.4178 12.7887 22.3621C12.8638 22.3064 12.9191 22.2282 12.9467 22.1389L13.6667 19.7052C14.2364 19.5385 14.7867 19.3116 15.3084 19.0284L17.5476 20.2236C17.631 20.2679 17.7265 20.2842 17.8199 20.2699C17.9133 20.2556 17.9996 20.2116 18.066 20.1444L19.7868 18.4236C19.854 18.3572 19.898 18.2709 19.9123 18.1775C19.9265 18.0842 19.9103 17.9887 19.866 17.9052L18.6708 15.6732C18.9569 15.1495 19.1862 14.5968 19.3548 14.0244L21.7812 13.3044C21.8706 13.2768 21.9488 13.2214 22.0044 13.1463C22.0601 13.0712 22.0904 12.9803 22.0908 12.8868V10.4315C22.0951 10.342 22.0718 10.2533 22.0242 10.1774C21.9766 10.1015 21.9069 10.0419 21.8244 10.0067ZM11.3339 15.6084C10.5507 15.6084 9.78506 15.3761 9.13383 14.941C8.48261 14.5059 7.97504 13.8874 7.67531 13.1638C7.37559 12.4402 7.29717 11.644 7.44997 10.8758C7.60276 10.1076 7.97992 9.40201 8.53374 8.84819C9.08756 8.29437 9.79317 7.91721 10.5613 7.76441C11.3295 7.61161 12.1258 7.69004 12.8494 7.98976C13.573 8.28949 14.1914 8.79705 14.6266 9.44828C15.0617 10.0995 15.294 10.8651 15.294 11.6484C15.294 12.6986 14.8767 13.7059 14.1341 14.4485C13.3914 15.1912 12.3842 15.6084 11.3339 15.6084Z" fill="#165829"/>
+                                </svg>
+                                    
+								<span class="menu-text ps-1">Setup</span>
+							</a>
+							<ul class="treeview-menu">
+                                <li class="child-menu">
+									<a href="" class='users'>User</a>
+								</li>
+
+							</ul>
+						</li>
+                     
+
+						
+                    </ul>
+                </div>
+            </nav>
+            <div  class="app-container m-2">
+                <div  class="app-header d-flex align-items-center app-header-d">
+                    <div  class="d-flex toggle-button">
+                        <button  class="toggle-sidebar">
+                            <i  class="bi bi-list lh-1"></i>
+                        </button>
+                        <button  class="pin-sidebar">
+                            <i  class="bi bi-list lh-1"></i>
+                        </button>
+                    </div>
+                    <div  class="app-brand-sm d-lg-none d-flex">
+                        <a  href="{% url 'dashboard:index' %}">
+							<img src="{{static_server}}/images/logo_sm.png" class="logo" alt="{{app_name}}" />
+                        </a>
+                    </div>
+                    <h5  class="m-0 ms-2 fw-semibold top_heading_title">
+                        Dashboard
+                    </h5>
+                    <div  class="header-actions">
+                        <div  class=" p-2  d-flex align-items-center user-div">
+
+                            <div class="dropdown ms-2">
+                                <a id="userSettings" class="dropdown-toggle user-settings" href="#!" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                   <i  class="bi bi-person-circle m-2 fs-4 lh-1"></i>
+                                  
+                                    <div class=" md rounded-4 fw-bold " >
+                                            {{ request.user.username }}
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end shadow-lg">
+                                    <a class="dropdown-item d-flex align-items-center" href="">
+                                        <i  class="bi bi-house fs-4 lh-1 pe-2"></i> Home
+                                    </a>
+                                    <div class="mx-3 my-2 d-grid">
+                                        <a href="" class="btn btn-warning logout_button">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div  class="app-body  px-0 py-0" >
+
+                    {% block main_content %}
+					
+					{% endblock %}
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="base_modal" tabindex="-1" aria-labelledby="base_modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="base_modalLabel">
+                            Modal title
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">...</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
+                            <svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.9998 0.999099L10.0373 0.0366211L5.49988 4.57402L0.962478 0.0366211L0 0.999099L4.5374 5.5365L0 10.0739L0.962478 11.0364L5.49988 6.49898L10.0373 11.0364L10.9998 10.0739L6.46236 5.5365L10.9998 0.999099Z" fill="white"/>
+                            </svg>
+                            Close       
+                        </button>
+                        
+                    </div>
+                </div>
+	        </div>
+        </div>
+        <div id="fileModal" class="modal fade show_file_modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">File Preview</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>`
+    
+    <script src="{{static_server}}/js/jquery.min.js"></script>
+    <script src="{{static_server}}/js/bootstrap.bundle.min.js"></script>
+    <script src="{{static_server}}/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
+    <script src="{{static_server}}/vendor/overlay-scroll/custom-scrollbar.js"></script>
+    <script src="{{static_server}}/js/custom.js"></script>
+    <script src="{{static_server}}/login-assets/js/notify.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- jQuery Confirm JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
+    <!-- jQuery UI after jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+   <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+   <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+   <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+   <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script>
+        var media_server = "{{ media_server }}";
+        var notyf = new Notyf({
+			duration:4000
+		});
+
+        function successMessage(message_) {
+            notyf.success(message_);
+        }
+
+        function errorMessage(message_) {
+            notyf.error(message_);
+        }
+        var validate = function(e) {
+            
+            var t = e.value;
+           
+            {% comment %} if (t.indexOf("-") >= 0) {
+                e.value = t.replace(/-/g, ""); 
+            } {% endcomment %}
+
+            if (t.includes("-")) {
+                e.value = t.replace(/-/g, ""); 
+            }
+            
+            if (t.indexOf(".") >= 0){
+                e.value = t.slice(0, t.indexOf(".") + 3);
+            }
+          }
+        
+
+        function showPreviewImage(input, requiredWidth = null, requiredHeight = null) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                const fileInput = $(input);
+                const reader = new FileReader();
+                const img = new Image();
+
+                reader.onload = function(e) {
+                    img.src = e.target.result;
+
+                    img.onload = function() {
+                       
+                        if (requiredWidth !== null && requiredHeight !== null) {
+
+                            if (img.naturalWidth === requiredWidth && img.naturalHeight === requiredHeight) {
+
+                                fileInput.closest('.image_div').find('.preview_image').attr('src', e.target.result).show();
+                            }
+                            else{
+                                errorMessage(`Image should be ${requiredWidth}x${requiredHeight} dimensions`);
+                                $(input).val(''); 
+                                $(input).closest('.image_div').find('.preview_image').attr('src', '').hide();
+                            }
+                        }
+                        else{
+                            fileInput.closest('.image_div').find('.preview_image').attr('src', e.target.result).show();
+                        }
+                    };
+                };
+                reader.readAsDataURL(file);
+            } else {
+                $(input).closest('.image_div').find('.preview_image').attr('src', '').hide();
+            }
+        }
+
+        function validateImage(input, options = {}) {
+            let { requiredWidth = null, requiredHeight = null, maxSizeMB = null } = options;
+
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                const fileInput = $(input);
+                const reader = new FileReader();
+                const img = new Image();
+
+                reader.onload = function (e) {
+                    img.src = e.target.result;
+
+                    img.onload = function () {
+                        let isValid = true;
+
+                        if (requiredWidth !== null && requiredHeight !== null) {
+                            if (img.naturalWidth !== requiredWidth || img.naturalHeight !== requiredHeight) {
+                                errorMessage(`Image should be ${requiredWidth}x${requiredHeight} dimensions`);
+                                isValid = false;
+                            }
+                        }
+
+                        if (maxSizeMB !== null) {
+                            const fileSizeMB = file.size / 1024 / 1024;
+                            if (fileSizeMB > maxSizeMB) {
+                                errorMessage(`Image size should not be more than ${maxSizeMB} MB`);
+                                isValid = false;
+                            }
+                        }
+
+                        if (isValid || (requiredWidth === null && requiredHeight === null && maxSizeMB === null)) {
+                            fileInput.closest('.image_div').find('.preview_image').attr('src', e.target.result).show();
+                        } else {
+                            $(input).val('');
+                            fileInput.closest('.image_div').find('.preview_image').attr('src', '').hide();
+                        }
+                    };
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                $(input).closest('.image_div').find('.preview_image').attr('src', '').hide();
+            }
+        }
+
+        function updateInputFiles(input, files_array) {
+            let data_transfer = new DataTransfer();
+        
+            files_array.forEach(function(file) {
+                data_transfer.items.add(file);
+            });
+        
+
+            input.files = data_transfer.files;
+        }
+
+        let allSelectedFiles = [];
+
+        function showMultiplePreviewImages(input) {
+            let files_array = Array.from(input.files); 
+            let preview_container = $(input).closest('.image_div').find('#image-preview');
+        
+            if (files_array.length > 0) {
+                files_array.forEach(function(file, index) {
+                    allSelectedFiles.push(file);
+                    const fileIndexOnAllSelectedFileArray = allSelectedFiles.length - 1;
+
+                    let reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        
+                        let imgWrapper = $('<div/>', {
+                            'class': 'img-wrapper',
+                            'style': 'position: relative; display: inline-block;'
+                        });
+        
+                       
+                        let img = $('<img/>', {
+                            'src': e.target.result,
+                            'class': 'preview_image',
+                            'style': ' margin-right: 10px; margin-bottom: 10px;',
+                            'alt': 'Selected Image'
+                        });
+        
+                        
+                        let close_button = $('<span/>', {
+                            'class': 'close-button',
+                            'html': '&times;', 
+                            'data-index': fileIndexOnAllSelectedFileArray,
+                            'style': ''
+                        });
+        
+                        
+                        imgWrapper.append(img).append(close_button);
+                        preview_container.append(imgWrapper);
+
+                        close_button.on('click', function() {
+                            let file_index = $(this).parent().index(); 
+                            let fileIndexOnArray = $(this).data('index');
+
+                            if (file_index > -1) {
+                                files_array.splice(file_index, 1); 
+                                allSelectedFiles.splice(fileIndexOnArray, 1);
+                                imgWrapper.remove();
+                                updateInputFiles(input, files_array); 
+                            }
+                        });
+                        
+                    };
+                    reader.readAsDataURL(file);
+                });
+            } else {
+                preview_container.empty();
+            }
+        }
+
+        function checkImageExtension(input) {
+            const allowed_extensions = ["jpg", "jpeg", "png", "avif", "pdf"];
+            if (input.files && input.files[0]) {
+                const fileName = input.files[0].name;
+                const extension = fileName.split('.').pop().toLowerCase();
+                if (!allowed_extensions.includes(extension)) {
+                    errorMessage("Select jpg, jpeg, png, avif, pdf");
+                    $(input).val(''); 
+                    $(input).closest('.image_div').find('.preview_image').attr('src', '').hide();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function openImagesModal(title, images) {
+            $('#images_modalLabel').text(title);
+            $('#images_modal .modal-body').empty();
+            
+            images.forEach(function(image_url) {
+                
+                let img = $('<img>').attr('src',media_server + image_url).addClass('img-fluid');
+                $('#images_modal .modal-body').append(img);
+            });
+            
+            $('#images_modal').modal('show');
+        }
+
+        function isValidURL(url) {
+            var regex = /^(https?:\/\/)?([a-zA-Z0-9.-]+)(\.[a-zA-Z]{2,})(:[0-9]+)?(\/.*)?$/;
+            return regex.test(url);
+        }
+
+        function isValidSocialMediaVideoURL(url) {
+            var regex = /^(https?:\/\/)?(www\.)?(facebook\.com|fb\.com|facebook\.watch|fb\.watch)\/.*\/videos\/.*|(https?:\/\/)?(www\.)?(facebook\.watch|fb\.watch|youtube\.com\/watch\?v=.+|youtu\.be\/.+)$/
+
+            return regex.test(url);
+        }
+
+        function displayFileModal(fileUrl, fileName, heading, imageSrc) {
+            $('#fileModal .modal-title').text(heading);
+        
+            let modalContent;
+            const fileExtension = fileName.split('.').pop().toLowerCase();
+            
+            if (fileExtension === 'pdf') {
+                modalContent = `<iframe src="${fileUrl}"  style="width: 100%; height: 80vh; max-height: 90vh; border: none;"  frameborder="0" allowfullscreen>
+                                </iframe>`;
+            } else {
+                modalContent = `<img src="${fileUrl}" alt="${fileName}" style="width: 100%; max-height:81vh">`;
+            }
+           
+        
+            $('#fileModal .modal-body').html(modalContent);
+            $('#fileModal').modal('show');
+        }
+
+
+
+        $(document).on('keyup change', '.integers_only', function(){
+            this.value = this.value.replace(/\D/g,'');
+        });
+
+        $(document).on('keypress change', '.number_with_max', function() { 
+            const maxAllowed = parseFloat($(this).attr('max')) || Infinity;
+        
+            if (!this.lastValidValue) {
+                this.lastValidValue = this.value;
+            }
+         
+            if (parseFloat(this.value) > maxAllowed) {
+                this.value = this.lastValidValue; 
+            } else {
+                this.lastValidValue = this.value;  
+            }
+        });
+        
+        
+        function IsValidFields(){
+            let isValid = true;
+            let scrolled = false;
+            $(".error-message").remove();
+            //let form_data = {};
+            let form_data = new FormData();
+            $(".required").each(function () {
+                $(this).removeClass("error");
+                if ($.trim($(this).val()).length === 0) {
+                    $(this).addClass("error");
+                    let error_message = $.trim($(this).siblings(".control-label").text());
+                    if (error_message.length === 0) {
+                        error_message = $.trim($(this).siblings().find(".control-label").text());
+                    }
+                    if (error_message.endsWith('*')) {
+                        error_message = error_message.slice(0, -1)
+                    }
+                    error_message = '<span class="error-message">' + error_message + ' is required</span>';
+                    if ($(this).siblings(".select2-container").length !== 0) {
+                        $(this).siblings(".select2-container").after(error_message);
+                        $(this).siblings(".select2-container").addClass('error');
+                    } else {
+                        $(this).after(error_message);
+                    }
+                    isValid = false;
+
+                    if (!scrolled) {
+                        $("html, body").animate({
+                            "scrollTop": $(this).offset().top - 150
+                        });
+                        scrolled = true;
+                    }
+
+                    
+                }else{
+					//form_data[$.trim($(this).attr("id"))] = $.trim($(this).val());
+					form_data.append($.trim($(this).attr("name")), $.trim($(this).val()));
+				}
+            });
+
+            $(".required_radio").each(function () {
+                const radioButtonName = $(this).find('input[type="radio"]').attr('name');
+                const selected = $(`input[name="${radioButtonName}"]:checked`);
+                if (selected.length === 0) {
+                    isValid = false;
+                    const error_message = '<p class="error-message">Please select an option</p>';
+                    $(this).append(error_message);
+                } else {
+                    form_data.append(radioButtonName, selected.val());
+                }
+            });
+			$(".optional").each(function(){
+				//form_data[$.trim($(this).attr("id"))] = $.trim($(this).val());
+                form_data.append($.trim($(this).attr("name")), $.trim($(this).val()));
+			});
+			if(!isValid){
+				form_data = {};
+			}
+            return {is_valid:isValid, form_data:form_data};
+        }
+
+        function handleResponsiveTable() {
+            if (window.innerWidth <= 991) {
+                if (!$.fn.DataTable.isDataTable('#responsiveDataTable')) {
+                    $("#responsiveDataTable").DataTable({
+                        responsive: true,
+                        paging: false,
+                        searching: false,
+                        bDestroy: true,
+                        info: false,
+                        ordering: false,
+                        autoWidth: false,
+                        order: [],
+                        columnDefs: [
+                            { responsivePriority: 1, targets: 0 },
+                            { responsivePriority: 2, targets: -1 },
+                        ],
+                    });
+                }
+            } else {
+                if ($.fn.DataTable.isDataTable('#responsiveDataTable')) {
+                    $('#responsiveDataTable').DataTable().destroy();
+                }
+            }
+        }
+        
+
+        $(document).ready(function () {
+            const urlPath = window.location.pathname;
+          
+            $(".parent-menu").each(function () {
+                if ($.trim($(this).children("a").attr("href")) === urlPath) {
+                    $(this).addClass("active").addClass("current-page");
+                    const parentName = $.trim($(this).children("a").children(".menu-text").text());
+                    $(".top_heading_title").html(parentName);
+                }
+            });
+            $(".child-menu").each(function () {
+                if ($.trim($(this).children("a").attr("href")) === urlPath) {
+                    $(this).children("a").addClass("active-sub");
+                    $(this).parents(".treeview").addClass("active").addClass("current-page");
+                    const childName = $.trim($(this).children("a").text());
+                    const parentName = $.trim($(this).parents(".treeview").children("a").children(".menu-text").text());
+                    $(".top_heading_title").html('<span class="top-parent-name">' + parentName + '</span> / '+childName);
+                }
+            });
+            $(".top_heading_title").fadeIn(500);
+            let isClicked = false;
+            $(".pin-sidebar").click(function () {
+                if(!isClicked){
+                    $(".side-logo").attr("src", "{{static_server}}/images/logo_sm.png");
+                }else{
+                    $(".side-logo").attr("src", "{{static_server}}/images/logo.png");
+                    
+                }
+                isClicked = !isClicked;
+            });
+            $(document).on('input keyup change paste', '.only_number', function () {
+                const number__ = this;
+                number__.value = number__.value.replace(/\D/g, '');
+                setTimeout(function () {
+                    number__.value = number__.value.replace(/\D/g, '');
+                }, 50);
+            });
+        
+            $(document).on('input keyup change paste', '.required', function () {
+                const theSelect2__ = $(this).siblings(".select2.select2-container.select2-container--default");
+                $(this).removeClass("error");
+                if (theSelect2__.length !== 0) {
+                    $(this).siblings(".select2.select2-container.select2-container--default").removeClass("error");
+                }
+                if ($(this).siblings(".error-message").length !== 0) {
+                    $(this).siblings(".error-message").remove();
+                }
+                
+            });
+           
+            $(document).on('input keyup change paste', '.fr-element', function () {
+                const editor = $(this);
+                const textarea = editor.closest('.fr-box').siblings('textarea.required');
+                if (textarea.length) {
+                    textarea.removeClass('error');
+                    textarea.siblings('.error-message').remove();
+                }
+                editor.closest('.fr-wrapper').removeClass('error');
+            });
+
+            $(document).on('click', 'input[type="radio"]', function () {
+                const radioGroup = $(this).closest('.required_radio');
+    
+                radioGroup.removeClass('error');
+                radioGroup.find('.error-message').remove();
+            });
+
+            $('select').select2();
+
+            $(document).on('input', '.count-characters', function () {
+                const maxLength = parseFloat($(this).attr('maxlength')) || Infinity;
+                let currentLength = $(this).val().length; 
+                let countDiv = $(this).siblings('.count_div').find('.count');
+            
+                if (currentLength <= maxLength) {
+                    countDiv.text(currentLength + '/' + maxLength); 
+                } else {
+                    $(this).val($(this).val().substring(0, maxLength)); 
+                    countDiv.text(maxLength + '/' + maxLength);
+                }
+            });
+
+            $(document).on('click', '.file-name', function () {
+                const fileUrl = $(this).data('file-url');
+                const fileName = $(this).data('file-name');
+                const heading = $(this).data('heading');
+                displayFileModal(fileUrl, fileName, heading);
+            });
+
+            $(document).on('change', '.file', function () {
+                const input = $(this);
+                const previewContainer = input.closest('.image_div').find('.image-preview');
+                let heading = input.closest('.image_div').find('.file_label').text().replace('*', '').trim();
+                const maxSizeMB = parseInt(input.data('max_size'));
+               
+                if (heading.length === 0) {
+                    heading = input.data('error_text');
+                }
+            
+                const allowedExtensions = ['pdf', 'png', 'jpeg', 'jpg'];
+                previewContainer.empty();
+            
+                if (input[0].files && input[0].files.length > 0) {
+                    const file = input[0].files[0]; 
+                    const fileName = file.name;
+                    const fileExtension = fileName.split('.').pop().toLowerCase();
+                    const fileUrl = URL.createObjectURL(file);
+                    const fileSizeMB = file.size / 1024 / 1024;
+            
+                    if (!allowedExtensions.includes(fileExtension)) {
+                        errorMessage("Choose Correct File Type");
+                        input.val('');
+                        input.closest('.image_div').find('.preview_image').attr('src', '').hide();
+                        return false;
+                    }
+            
+                    
+                    if (maxSizeMB) {
+                        if (fileSizeMB > maxSizeMB) {
+                            errorMessage(`File size should not be more than ${maxSizeMB} MB`);
+                            input.val('');
+                            input.closest('.image_div').find('.preview_image').attr('src', '').hide();
+                            return false;
+                        }
+                    } else {
+                        if (fileSizeMB > 1) {
+                            errorMessage("File size should not be more than 1 MB");
+                            input.val('');
+                            input.closest('.image_div').find('.preview_image').attr('src', '').hide();
+                            return false;
+                        }
+                    }
+            
+                
+                    const filePreview = `
+                        <div class='d-flex pb-2'>
+                            <div class="file-name" data-file-url="${fileUrl}" data-heading="${heading}" data-file-name="${fileName}">
+                                <span class="preview_title" style="cursor: pointer; text-decoration: none; color: blue;">${fileName}</span>
+                            </div>
+                            <div>
+                                <button class="remove-file-button mx-2" style="">&times;</button>
+                            </div>
+                        </div>
+                    `;
+                    previewContainer.append(filePreview);
+                }
+            });
+
+            function updateInputFiles(input, files_array) {
+                const dataTransfer = new DataTransfer();
+        
+                files_array.forEach(function (file) {
+                    dataTransfer.items.add(file);
+                });
+        
+                input.files = dataTransfer.files; 
+            }
+        
+            $(document).on('click', '.remove-file-button', function () {
+                const filePreview = $(this).closest('.d-flex');
+                const input = filePreview.closest('.image_div').find('input[type="file"]');
+                let files_array = Array.from(input[0].files);
+                let file_index = filePreview.index(); 
+                let fileIndexOnArray = $(this).data('index'); 
+                if (file_index > -1 && fileIndexOnArray > -1) {
+                    files_array.splice(file_index, 1); 
+                
+                    filePreview.remove();
+                    updateInputFiles(input[0], files_array);
+                }
+            });
+            
+        
+            handleResponsiveTable();
+            $(window).resize(handleResponsiveTable);
+            
+        });
+
+    </script>
+	
+	{% block script %}
+	
+	{% endblock %}
+    </body>
+</html>

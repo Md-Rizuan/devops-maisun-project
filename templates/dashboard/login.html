@@ -1,0 +1,434 @@
+<html>
+<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Login - SZHM Trust</title>
+        <link rel="icon" type="image/png" href="{{static_server}}/images/szhm_trust3.svg">
+        <link href="{{static_server}}/login-assets/css/bootstrap-5.css" rel="stylesheet" />
+        <link href="{{static_server}}/login-assets/css/login-4.css" rel="stylesheet" />
+        <link rel="stylesheet" href="{{static_server}}/login-assets/css/font-awesome.css" />
+        <link href="{{static_server}}/login-assets/css/notify.css" rel="stylesheet" />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+              }
+              
+            body, html {
+                height: 100%;
+                overflow: hidden;
+            }
+            
+            .background {
+                position: relative;
+                width: 100%;
+                height: 100vh;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+              
+            .bg-image {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 0;
+              }
+              
+            .logo {
+                position: absolute;
+                top: 80px;
+                left: 30px;
+                width: 265px;
+                z-index: 2;
+            }
+            .bg-tint {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                z-index: 1;
+                background: linear-gradient(to left, #000000 0%, #00000000 100%);
+              }
+              
+            .login-box {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 90%;
+                max-width: 500px;
+                padding: 50px;
+                border-radius: 20px;
+                background: #D9D9D91A;
+                color: white;
+                z-index: 2;
+                right: 10%; 
+                box-shadow: -25.15px 25.15px 25.15px 0px #FFFFFF1A inset;
+                box-shadow: 25.15px -25.15px 25.15px 0px #A5A5A51A inset;
+                backdrop-filter: blur(1.5px)  
+            }
+            
+            .login-box h2 {
+                font-size: 28px;
+                margin-bottom: 10px;
+            }
+              
+            .subtext {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+              
+            label {
+                display: block;
+                margin: 10px 0 5px;
+                font-size: 14px;
+            }
+            
+            .required {
+                color: red;
+            }
+            
+            .login-box input[type="text"],
+                .login-box input[type="password"] {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 5px;
+                border-radius: 8px;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                outline: none;
+                background-color: transparent; 
+                backdrop-filter: blur(1.5px);
+                -webkit-backdrop-filter: blur(1.5px);
+                color: white;
+                box-sizing: border-box;
+                box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.1);
+            }
+
+            input:-webkit-autofill,
+            input:-webkit-autofill:hover,
+            input:-webkit-autofill:focus,
+            input:-webkit-autofill:active {
+                box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.4) inset !important; 
+                -webkit-text-fill-color: white !important;
+                border: 1px solid rgba(255, 255, 255, 0.3) !important;
+                transition: background-color 5000s ease-in-out 0s;
+            }
+           
+            ::placeholder,
+            input::placeholder {
+              color: white !important;
+              opacity: 0.5 !important;
+            }
+            
+            input:-webkit-autofill::first-line {
+              color: white !important;
+            }
+            
+            .password-wrapper {
+                position: relative;
+            }
+            
+            .toggle-password {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+            }
+            
+            .options {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 13px;
+                margin-bottom: 20px;
+            }
+            
+            .login-button {
+                width: 100%;
+                padding: 10px;
+                border: none;
+                background:  #fff;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                color: #000;
+            }
+            
+            .error-message{
+                color: #e71818;
+                margin-left:15px;
+                opacity:0;
+            }
+           
+            .fa-eye,.fa-eye-slash{
+                color: #fff;
+                font-size: 1.15em;
+            }
+            
+            .password-parent{
+                position:relative;
+            }
+            #icon-container{
+               
+                padding:8px 2px 8px 8px;
+                position: absolute;
+                top: 32px;
+                right: 20px;
+                cursor:pointer;
+            }
+           
+            .toastBox {
+                position: fixed;
+                top: 30px;
+                right: 30px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                overflow: hidden;
+                padding: 20px;
+            }
+
+            .toast {
+                width: 400px;
+                height: 80px;
+                background: #fff;
+                font-weight: 500;
+                margin: 15px 0;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+                display: flex;
+                align-items: center;
+                position: relative;
+                transform: translateX(100%);
+                animation: moveleft 0.5s linear forwards;
+            }
+
+            @keyframes moveleft {
+                100% {
+                    transform: translateX(0);
+                }
+            }
+
+            .toast i {
+                margin: 0 20px;
+                font-size: 35px;
+            }
+
+            .toast.success i {
+                color: green;
+            }
+
+            .toast.error i {
+                color: red;
+            }
+
+            .toast.invalid i {
+                color: orange;
+            }
+
+            .toast::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 5px;
+                animation: anim 3s linear forwards;
+            }
+
+            @keyframes anim {
+                100% {
+                    width: 0;
+                }
+            }
+
+            .toast.success::after {
+                background: green;
+            }
+
+            .toast.error::after {
+                background: red;
+            }
+
+            .toast.invalid::after {
+                background: orange;
+            }
+
+            .close-btn {
+                background: none;
+                border: none;
+                cursor: pointer;
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 5px;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1;
+            }
+
+            .close-btn i {
+                color: #666;
+            }
+
+            .toast.error .close-btn i,
+            .toast.invalid .close-btn i {
+                color: #666;
+            }
+            
+            @media only screen and (max-width: 991px) {              
+               
+            }
+            @media (max-width: 768px) {
+                .login-box {
+                  left: 50%;
+                  right: auto;
+                  transform: translate(-50%, -50%);
+                }
+                .logo {
+                    position: static;
+                    display: block;
+                    margin: auto;
+                    padding-top:10px;
+                    width: 180px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+    <section class="">
+        <div class="background">
+            <img src="{{home_theme_server}}/assets/images/login_bg.png" alt="Mosque Background" class="bg-image" />
+            <div class="bg-tint"></div>
+            <img src="{{home_theme_server}}/assets/images/login_logo.png"  alt="SZHM Trust Logo" class="logo" />
+            <div class="login-box">
+              <h2>Welcome</h2>
+              <p class="subtext">Please enter your login credentials</p>
+              
+                <div class="col-12">
+                    <label for="UserId" class="form-label">USER ID<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="UserId" id="UserId" placeholder="User Id" autocomplete="off"/>
+                    <span id="user_message" class="error-message">User ID is required</span>
+                    {% csrf_token %}
+                </div>
+        
+                <div class="col-12 password-parent">
+                    <label for="Password" class="form-label">PASSWORD<span class="text-danger">*</span></label>
+                    <input type="password" class="form-control" name="password" id="Password" placeholder="Password" autocomplete="off" />
+                    <span id="password_message" class="error-message">Password is required</span>
+                    <p id="icon-container">
+                        <i class="fa fa-eye"></i>
+                    </p>
+                </div>
+            
+                <div class="options">
+                    {% comment %} <a href="#" class="forgot-password">Forgot Password?</a> {% endcomment %}
+                </div>
+                <button class="login-button" id="login_button" type="submit">
+                    Login
+                </button>
+        
+            </div>
+        </div>
+    </section>
+
+    <div class="toastBox"></div>
+    <script src="{{static_server}}/login-assets/js/jquery.js"></script>
+    <script src="{{static_server}}/login-assets/js/notify.js"></script>
+    <script>
+
+
+        var notyf = new Notyf({
+			duration: 4000
+		});
+
+        function performLogin(){
+            $(".error-message").css("opacity", 0);
+            var UserId = $.trim($("#UserId").val());
+            var Password = $.trim($("#Password").val());
+            if (UserId.length == 0) {
+                $("#user_message").css("opacity", 1);
+                return;
+            }
+            if (Password.length == 0) {
+                $("#password_message").css("opacity", 1);
+                return;
+            }
+            $("#login_button").attr("disabled", "disabled");
+            $.ajax({
+                url: "{% url 'user:login' %}",
+                method: "POST",
+                data: {
+                    username: UserId, password: Password, csrfmiddlewaretoken:$.trim($('input[name="csrfmiddlewaretoken"]').val())
+                },
+                success: function (data) {
+                    if (data.status == 1) {
+                        notyf.success("Logged in Successfully");
+                        window.location.href = location.href;
+                    } else if (data.status == 2) {
+                        notyf.error("User ID or Password Incorrect");
+                        $("#login_button").removeAttr("disabled");
+                    } else if (data.status === 6) {
+                        notyf.success("Logged in Successfully");
+                        
+                        setTimeout(() => {
+                            const pre_password_url = "{% url 'user:pre_password_change' %}";
+                            history.replaceState(null, '', pre_password_url);
+                            window.location.href = pre_password_url;
+                        }, 1000);
+                        
+                    }
+                },
+                error: function (e) {
+                    notyf.error("User ID or Password Incorrect");
+                    $("#login_button").removeAttr("disabled");
+                }
+            });
+        }
+
+        $(document).ready(function () {
+
+            $(document).on("keyup change input paste", "#UserId, #Password", function () {
+                $(this).next(".error-message").css("opacity", 0);
+            });
+
+            var isPassword = true;
+
+            $("#icon-container").click(function () {
+                if (isPassword) {
+                    $("#Password").attr("type", "text");
+                    $(this).children(".fa").removeClass("fa-eye").addClass("fa-eye-slash");
+                } else {
+                    $("#Password").attr("type", "password");
+                    $(this).children(".fa").removeClass("fa-eye-slash").addClass("fa-eye");
+                }
+                isPassword = !isPassword;
+            });
+
+            $("#UserId").keyup(function (e) {
+                if (e.keyCode == 13) {
+                    $("#Password").focus();
+                }
+            });
+
+            $("#Password").keyup(function (e) {
+                if (e.keyCode == 13) {
+                    performLogin();
+                }
+            });
+
+            $("#login_button").click(function () {
+                performLogin();
+            });
+
+        });
+
+
+    </script>
+</html>

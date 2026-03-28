@@ -1,0 +1,59 @@
+<div class="list_holder card-body overflow-auto mb-2">
+    <table class="table table-bordered text-nowrap w-100 table-striped table-hover" id="responsiveDataTable">
+        
+        <thead class="table-th-primary">
+            <tr>
+                <th style="width:5%">
+                    <input type="checkbox" id="select_all">
+                </th>
+                <th style="width:30%">Question</th>
+                <th style="width:45%">Options</th>
+                <th style="width:20%">Correct Answer</th>
+            </tr>
+        </thead>
+
+        <tbody class="content_body">
+            {% for question in questions %}
+                <tr data-id="{{ question.id }}">
+                  
+                    <td class="text-center">
+                        <input type="checkbox"
+                               class="question_checkbox"
+                               value="{{ question.id }}">
+                    </td>
+
+                    <td>{{ question.text }}</td>
+
+                    <td>
+                        A. {{ question.option_a }}<br>
+                        B. {{ question.option_b }}<br>
+                        C. {{ question.option_c }}<br>
+                        D. {{ question.option_d }}
+                    </td>
+
+                    <td>
+                        {% if question.correct_answer == "A" %} A. {{ question.option_a }}
+                        {% elif question.correct_answer == "B" %} B. {{ question.option_b }}
+                        {% elif question.correct_answer == "C" %} C. {{ question.option_c }}
+                        {% elif question.correct_answer == "D" %} D. {{ question.option_d }}
+                        {% endif %}
+                    </td>
+
+                </tr>
+            {% empty %}
+                <tr>
+                    <td class="text-center" colspan="4">No Question exists.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+<div class="text-end mt-2">
+    <button type="button"
+            class="btn btn-success"
+            id="btn_submit_selected">
+         Add Selected Questions
+    </button>
+</div>
+<br>

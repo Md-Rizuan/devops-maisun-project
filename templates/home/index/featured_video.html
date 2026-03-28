@@ -1,0 +1,76 @@
+<section class="video-section px-2">
+  <div class="container text-center">
+    <p class="badge">REEL</p>
+    <h1 class="section-title">
+      <span class="brush-font cerise-red">FEATURED VIDEO</span> of the Week
+    </h1>
+    <h5 class="pb-3">Catch the latest highlight you can’t miss</h5>
+  </div>
+
+  <div class="swiper videoSwiper pb-3">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide video-card">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/4U9DQ6pSmqc?si=IaVo0W1aI5M47Ps3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+      <div class="swiper-slide video-card">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/OEidw7_BFkw?si=t8MMiP2Q_3emepmI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+      <div class="swiper-slide video-card">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/nLhyD04isHE?si=eIz5EyhqD14vAOn-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+      <div class="swiper-slide video-card">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Q3yLtKFA7sg?si=_Yl-Pf2kmG_09meJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+      <div class="swiper-slide video-card">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/BRplFsuwy38?si=hRRabR6YlkUmNbeC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    
+      <!-- Slide 1 -->
+      {% comment %} <div class="swiper-slide video-card" data-video="https://www.youtube.com/embed/4U9DQ6pSmqc">
+        
+        <img src="{{home_theme_server}}/images/video1.png" alt="Video 1">
+        <div class="play-icon">▶</div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="swiper-slide video-card" data-video="https://www.youtube.com/embed/OEidw7_BFkw">
+        <img src="{{home_theme_server}}/images/video2.png" alt="Video 2">
+        <div class="play-icon">▶</div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="swiper-slide video-card" data-video="https://www.youtube.com/embed/nLhyD04isHE">
+        <img src="{{home_theme_server}}/images/video3.png" alt="Video 3">
+        <div class="play-icon">▶</div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="swiper-slide video-card" data-video="https://www.youtube.com/embed/nLhyD04isHE">
+        <img src="{{home_theme_server}}/images/video4.png" alt="Video 4">
+        <div class="play-icon">▶</div>
+      </div>
+    </div> {% endcomment %}
+
+    <!-- Pagination -->
+    <div class=" video-pagination"></div>
+  </div>
+</section>
+
+<!-- Video Modal -->
+<div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+    
+      <div class="modal-header border-0">
+        <h5 class="modal-title">Video Player</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-0">
+        <iframe id="videoFrame" width="100%" height="450" frameborder="0"
+          allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+
+    </div>
+  </div>
+</div>

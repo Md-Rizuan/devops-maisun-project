@@ -1,0 +1,350 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+Activity Log
+{% endblock %}
+
+{% block style %}
+	<style>
+		.col-xs-12 {
+        	padding: 4px 2px;
+    	}
+		.remarks {
+			word-wrap:break-word;
+			max-width: 512px;
+   		 }	
+		.view_learner_button, .submit_button{
+			color:white;
+			font-size:0.9em;
+			background:linear-gradient(to right, rgb(39,175,190), rgb(39,98,143)) !important;
+			padding:4px 16px;
+		}
+		
+		.submit_button{
+			font-size:1.1em;
+		}
+		
+		.modal-title{
+			font-size:1.8em;
+		}
+		
+		#writer_id, #menu_id{
+			display:none;
+		}
+		
+		.learner_point, .learner_description{
+			margin:0;
+			padding:0;
+		}
+		
+		.learner_point{
+			font-size:1.2em;
+			font-weight:bold;
+			margin-top:6px;
+		}
+		
+		.learner_description{
+			font-size:1.14em;
+		}
+		
+		.learner_approve_button, .learner_approve_button:hover, .learner_approve_button:focus{
+			color:white;
+			background:linear-gradient(to right, rgb(39,175,190), rgb(39,98,143)) !important;
+		}
+		
+		.modal_close_button, .modal_close_button:hover, .modal_close_button:focus{
+			color:rgb(35,112,169);
+			background:linear-gradient(to bottom, rgb(255,255,255), rgb(204,226,244)) !important;
+		}
+		
+		table.dataTable{
+			margin-top:0 !important;
+		}
+		
+		#for_datatable_info{
+			opacity:0;
+		}
+		
+		#for_datatable_wrapper .row{
+			width:100% !important;
+		}
+		
+		#for_datatable_wrapper .row, #for_datatable_wrapper .col-sm-12{
+			margin:0;
+			padding:0;
+		}
+		
+		.searcher_table{
+			width:100%;
+		}
+		
+		.media_holder{
+			margin-top:20px;
+			padding:8px 15px 0px 15px;
+			box-shadow:0px 2px 6px 0px rgb(172,210,238);
+		}
+				
+		#view_nid_image, #view_testimonial, #view_apply_form,
+			#download_nid_image, #download_testimonial, #download_apply_form{
+				color:white;
+				background:linear-gradient(to right, rgb(39,175,190), rgb(39,98,143)) !important;
+		}
+		
+		.extra_space{
+			height:2px;
+			margin:0;
+			padding:0;
+		}
+		
+		#nid_image, #testimonial, #apply_form{
+			width:60%;
+			margin-top:10px;
+			margin-bottom:12px;
+			box-shadow:0px 2px 6px 0px rgb(172,210,238);
+			border-radius:4px;
+			display:none;			
+		}
+		
+		.list_container, .top_holder{
+			width:96%;
+			height:auto;
+			margin-left:2%;
+			padding:14px;
+			padding-bottom:40px;
+		}
+		
+		
+		.top_holder{
+			padding:0px;
+		}
+		
+		.control-label{
+			font-size:1.18em !important;
+			margin-top:20px;
+		}
+		
+		.form-control{
+			font-size:1.05em !important;
+			margin-top:4px;
+		}
+		
+		.list_container{
+			padding:0px;
+			min-height:55vh;
+		}
+		
+		.searcher_table a{
+			color:rgb(14,138,180);
+		}
+		
+		/*
+			screen media
+		*/
+		
+		@media only screen and (max-width: 1023px) {
+			.list_container, .top_holder{
+				width:98%;
+				margin-left:1%;
+			}
+		}		
+		
+		@media only screen and (max-width: 992px) {
+			.media_holder{
+				padding:6px;
+			}
+			#nid_image, #testimonial, #apply_form{
+				width:100%;
+			}
+		}
+			
+		/*
+			screen
+		*/
+		
+	</style>	
+{% endblock %}
+
+{% block main_content %}
+	
+		<div class="content_parent">
+			<div class="title_holder">
+				<div class="container-fluid"></div>
+			</div>
+			<div class="container-fluid">					
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="top_holder">
+							
+							<div class="row">
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+									<input id="description" type="text" class="form-control"  name="description" autocomplete="off" 
+									{% if description %} value="{{ description }}" {% endif %} placeholder="search by description">
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+									<input id="from_date" type="text" class="form-control"  name="from_date datepicker" required readonly 
+									{% if from_date %} value="{{ from_date|date:'Y-m-d' }}" {% endif %} placeholder="from date">
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+									<input id="to_date" type="text" class="form-control" name="to_date datepicker" required readonly
+									{% if from_date and to_date %} value="{{ to_date|date:'Y-m-d' }}" {% endif %} placeholder="to date">
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-right">
+									<button class="btn btn-primary filter" style="margin: 4px 1px 1px 4px;font-size: 0.9rem;">
+										Search
+									</button>
+									<a class="btn btn-success reset_button" href="{% url 'backup_log:activity-log' %}"  style="margin: 4px 1px 1px 4px;font-size: 0.9rem;" >
+										Reset
+									</a>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="list_holder">
+							<table class="table table-hover table-striped category_table searcher_table">
+								<thead class='table-greenish'>
+									<tr>
+										<th style="width:60%;">Description</th>
+										<th>User</th>
+										<th>Date</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% if activity_log  %}
+										{% for the_log in activity_log %}
+											<tr>
+												<td class="remarks">{{the_log.description}}</td>
+												<td>{{ the_log.user }}</td>
+												<td>{{the_log.activity_time}}</td>
+											</tr>
+										{% endfor %}
+									{% else %}
+										<tr class='text-center'>
+											<td colspan="3">No data exists</td>
+										</tr>
+                            		{% endif %}
+								</tbody>
+							</table>
+						</div>								
+					</div>
+					<div class="col-lg-12">
+						{% if activity_log.has_other_pages %}
+							<br/>
+							<div style="position:relative;">
+								<ul class="pagination" style="position:absolute;right:0px;">
+									{% if activity_log.has_previous %}
+										<li class="page-item">
+											<a class="page-link" href="?page={{activity_log.previous_page_number}}" tabindex="-1">
+												&laquo;
+											</a>
+										</li>
+									{% endif %}                                 
+									
+									{% for num in activity_log.paginator.page_range %}
+										{% if activity_log.number == num %}
+											<li class="page-item">
+												<a class="page-link active" href="#">{{num}} <span class="sr-only">(current)</span></a>
+											</li>
+										{% elif num > activity_log.number|add:'-3' and num < activity_log.number|add:'3' %}
+											<li class="page-item">
+												<a class="page-link" href="?page={{num}}">
+													{{num}}
+												</a>
+											</li>
+										{% endif %}
+									{% endfor %}
+									
+									{% if activity_log.has_next %}
+										<li class="page-item">
+											<a class="page-link" href="?page={{activity_log.next_page_number}}" tabindex="-1">
+												&raquo;
+											</a>
+										</li>
+									{% endif %}
+								</ul>
+							</div>
+						{% endif %}
+						<br/><br/><br/><br/>
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}
+
+{% block script %}	
+	<script>
+		$('#from_date, #to_date').datepicker({
+            dateFormat: "yy-mm-dd",
+            changeYear: true,
+            changeMonth: true,
+            maxDate: "+0d",
+            yearRange: "2021:" + (parseInt(new Date().getFullYear())).toString()
+        }); 
+		
+		$(window).resize(function(){
+			$(".heading_table").css({
+				"width":$(".list_container").width()-5,
+				"top":$(".list_container").offset().top
+			});
+		});
+		
+		$.fn.extend({
+			filters: function (table) {
+				var box = $(this);
+				$(this).keyup(function () {
+					var searchText = $.trim($(box).val()).toLowerCase();
+					$(table + " tbody tr").each(function () {
+						$(this).css("display", $(this).text().toLowerCase().indexOf(searchText) === -1 ? "none" : "");
+					});
+				});
+				return $(this);
+			}
+		});
+
+		$(document).ready(function () {
+			var url = window.location.href;
+			
+			var sliced = url.indexOf("action") > 0 ? url.slice(url.indexOf("action")) : "";
+			$("a.page-link").each(function () {
+				this.href += sliced ? "&" + sliced : sliced;
+			});
+		});
+		
+		$(document).ready(function(){
+			
+			$('.nav-item[data-menu="activity-log"]').addClass("active");
+            $('.nav-item[data-slide="backup-menu"]').show();
+            $('.fa[data-icon="backup-menu"]').removeClass("fa-plus-circle").addClass("fa-minus-circle");
+			
+			$("#search_box").filters(".searcher_table");
+			
+			$(".filter").click(function () {
+				var from_date = $("#from_date").val();
+				var to_date = $("#to_date").val();
+				var description = $("#description").val()
+				if (!description && !from_date && !to_date) {
+					errorMessage("Please select at least one field");
+					return;
+				}
+				var url = "{% url 'backup_log:activity-log' %}?action=filter";
+				if (!from_date && to_date) {
+					errorMessage("From date is required with To Date");
+					return;
+				}
+				if (new Date(from_date) > new Date(to_date)) {
+					errorMessage("To Date must be greater than or equal to From Date");
+					return;
+				}
+				if (description) url += "&description=" + description;
+				if(from_date) url += "&from_date=" + from_date;
+				if(to_date) url +=  "&to_date=" + to_date;
+
+				window.location.replace(url);
+        	});
+			
+		
+		});
+		
+	
+	</script>
+
+{% endblock %}

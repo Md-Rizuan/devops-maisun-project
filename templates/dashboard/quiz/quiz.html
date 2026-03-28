@@ -1,0 +1,579 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %} Quiz {% endblock %}
+
+{% block main_content %}
+<div class="content_parent">
+  <div class="container-fluid">
+    <div class="card custom-card">
+      <div class="card-body">
+
+        <div class="row gx-4 quiz_div">
+            <input type="hidden" class="form-control optional" name='quiz_id' value="{{quiz.id}}" >
+          <div class="col-lg-6 col-sm-6 col-12">
+            <label class="form-label">Title</label>
+            <input type="text" id="title" maxlength='255' name='title' {% if quiz %} value="{{quiz.title}}" {% endif %} class="form-control optional">
+          </div>
+          <div class="col-lg-3 col-sm-6 col-12">
+            <label class="form-label">Week Start <span class="required_text">*</span></label>
+            <input type="date" id="week_start" name='week_start' {% if quiz %} value="{{quiz.week_start|date:'Y-m-d'}}" {% endif %} class="form-control required">
+          </div>
+
+          <div class="col-lg-3 col-sm-6 col-12">
+            <label class="form-label">Week End <span class="required_text">*</span></label>
+            <input type="date" id="week_end" name='week_end' {% if quiz %} value="{{quiz.week_end|date:'Y-m-d'}}" {% endif %} class="form-control required">
+          </div>
+        </div>
+
+        <hr>
+
+        {% if not quiz %}
+            <div class="card p-3 mb-3">
+
+                <div class="d-flex gap-3 align-items-center">
+            
+                    <div class="d-flex gap-2 align-items-center">
+                        <input type="number" id="question_count" class="form-control" placeholder="No. of questions" min="1" style="width:180px;">
+                        <button type="button" class="btn btn-primary" id="btn_random">
+                            🎲 Random Questions
+                        </button>
+                    </div>
+            
+                    <button type="button" class="btn btn-info" id="btn_previous">
+                        <i class='fa fa-refresh'></i> Choose From Previous
+                    </button>
+                    <a href="{% url 'dashboard:quiz' %}" class="btn reset_page btn-danger">
+                        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.7956 7.69937C13.7956 8.07096 14.0968 8.37219 14.4684 8.37219C14.84 8.37219 15.1413 8.07096 15.1413 7.69937C15.1413 3.28211 11.8776 0.298391 7.87093 0.298279C4.76964 0.298279 2.1569 1.90435 1.1407 4.53498L1.04739 4.79255L1.02834 4.85891C0.9524 5.19125 1.13932 5.53379 1.46922 5.64541C1.79908 5.75695 2.15501 5.59808 2.29646 5.28797L2.32208 5.22358L2.39436 5.02449C3.18104 2.98687 5.23364 1.64393 7.87093 1.64393C11.1521 1.64404 13.7956 4.04287 13.7956 7.69937Z" fill="white"/>
+                            <path d="M0.338623 7.69935C0.338623 12.1166 3.60229 15.1003 7.60896 15.1004C10.7109 15.1004 13.323 13.4943 14.3392 10.8637L14.4325 10.6062L14.4515 10.5398C14.5275 10.2075 14.3406 9.86492 14.0107 9.75331C13.6808 9.64176 13.3249 9.80063 13.1834 10.1107L13.1578 10.1751L13.0855 10.3742C12.2989 12.4119 10.2469 13.7548 7.60896 13.7548C4.32778 13.7547 1.68428 11.3558 1.68428 7.69935C1.68428 7.32775 1.38304 7.02652 1.01145 7.02652C0.639858 7.02652 0.338623 7.32775 0.338623 7.69935Z" fill="white"/>
+                            <path d="M1.05138 5.23747C1.16714 5.5581 1.50922 5.74499 1.84707 5.66061L4.53838 4.98779L4.60474 4.96807C4.92537 4.85231 5.11226 4.51023 5.02788 4.17238C4.94337 3.83432 4.6171 3.62005 4.2795 3.66907L4.21248 3.68287L2.17297 4.19275L1.66375 2.1539C1.57364 1.79346 1.20879 1.57437 0.848345 1.66439C0.4879 1.7545 0.268815 2.11935 0.358838 2.4798L1.03166 5.1711L1.05138 5.23747Z" fill="white"/>
+                            <path d="M13.8155 13.245C13.9056 13.6055 14.2704 13.8246 14.6309 13.7345C14.9913 13.6444 15.2104 13.2796 15.1204 12.9191L14.4475 10.2278C14.3574 9.86739 13.9926 9.6483 13.6321 9.73833L10.9408 10.4112L10.8745 10.4309C10.5538 10.5466 10.3669 10.8887 10.4513 11.2266C10.5358 11.5646 10.8621 11.7789 11.1997 11.7299L11.2667 11.7161L13.3056 11.2068L13.8155 13.245Z" fill="white"/>
+                        </svg>
+                        Reset
+                    </a>
+            
+                </div>
+            </div>
+        {% endif %}
+        <div class='content_body'>
+        </div>
+
+        <div class="question_container border rounded p-3 mb-4" >
+            {% if quiz %}
+                {% for q in quiz_questions %}
+                    <div class="row question_div">
+                        <input type="hidden" class="form-control optional question_id" name='question_id' value="{{q.id}}" >
+                        <div class="row gx-4">
+                            {% if not forloop.first %}
+                                <hr>
+                            {% endif %}
+                            <div class="col-12 d-flex justify-content-end">
+                                <i class="fa fa-trash text-danger btn-delete" data-id='{{q.id}}' data-name='{{q.question.text}}'></i>
+                            </div>
+                            <div class="col-lg-8 col-12">
+                                <label class="form-label">Question<span class="required_text">*</span></label>
+                                <textarea class="form-control required question_text" name='question_text' rows="2" placeholder="Enter question">{{q.question.text}}</textarea>
+                            </div>
+                
+                            <div class="col-lg-2 col-6">
+                                <label class="form-label">Order<span class="required_text">*</span></label>
+                                <input type="number" class="form-control required question_order" name='question_order' min="1"  value="{{q.order}}" >
+                            </div>
+                        </div>
+                
+                        <div class="mt-3">
+                            <label class="form-label">Options (Select correct answer)<span class="required_text">*</span></label>
+                
+                            <div class="row align-items-center mb-2">
+                                <div class="col-auto">
+                                    <input type="radio" name="correct_answer_{{ forloop.counter }}" {% if q.question.correct_answer == "A" %}checked{% endif %} class="form-check-input" value="A">
+                                </div>
+                                <div class="col">
+                                    <input type="text" data-error_text='option' class="form-control required option1" value="{{q.question.option_a}}" placeholder="Option A">
+                                </div>
+                            </div>
+                            
+                            <div class="row align-items-center mb-2">
+                                <div class="col-auto">
+                                    <input type="radio" name="correct_answer_{{ forloop.counter }}" {% if q.question.correct_answer == "B" %}checked{% endif %} class="form-check-input" value="B">
+                                </div>
+                                <div class="col">
+                                    <input type="text" data-error_text='option' class="form-control required option2" value="{{q.question.option_b}}" placeholder="Option B">
+                                </div>
+                            </div>
+                            
+                            <div class="row align-items-center mb-2">
+                                <div class="col-auto">
+                                    <input type="radio" name="correct_answer_{{ forloop.counter }}" {% if q.question.correct_answer == "C" %}checked{% endif %} class="form-check-input" value="C">
+                                </div>
+                                <div class="col">
+                                    <input type="text" data-error_text='option' value="{{q.question.option_c}}" class="form-control required option3" placeholder="Option C">
+                                </div>
+                            </div>
+                            
+                            <div class="row align-items-center mb-2">
+                                <div class="col-auto">
+                                    <input type="radio" name="correct_answer_{{ forloop.counter }}"  {% if q.question.correct_answer == "D" %}checked{% endif %} class="form-check-input" value="D">
+                                </div>
+                                <div class="col">
+                                    <input type="text" data-error_text='option' value="{{q.question.option_d}}" class="form-control required option4" placeholder="Option D">
+                                </div>   
+                            </div>
+                            
+                
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="row question_div">
+                    <input type="hidden" class="form-control optional question_id" name='question_id' value="0" >
+                    <div class="row gx-4">
+                        <div class="col-lg-8 col-12">
+                            <label class="form-label">Question<span class="required_text">*</span></label>
+                            <textarea class="form-control required question_text" name='question_text' rows="2" placeholder="Enter question"></textarea>
+                        </div>
+            
+                        <div class="col-lg-2 col-6">
+                            <label class="form-label">Order<span class="required_text">*</span></label>
+                            <input type="number" class="form-control required question_order" name='question_order' min="1" >
+                        </div>
+                    </div>
+            
+                    <div class="mt-3">
+                        <label class="form-label">Options (Select correct answer)<span class="required_text">*</span></label>
+            
+                        <div class="row align-items-center mb-2">
+                            <div class="col-auto">
+                                <input type="radio" name="correct_answer_1" class="form-check-input" value="A">
+                            </div>
+                            <div class="col">
+                                <input type="text" data-error_text='option' class="form-control required option1" placeholder="Option A">
+                            </div>
+                        </div>
+                        
+                        <div class="row align-items-center mb-2">
+                            <div class="col-auto">
+                                <input type="radio" name="correct_answer_1" class="form-check-input" value="B">
+                            </div>
+                            <div class="col">
+                                <input type="text" data-error_text='option' class="form-control required option2" placeholder="Option B">
+                            </div>
+                        </div>
+                        
+                        <div class="row align-items-center mb-2">
+                            <div class="col-auto">
+                                <input type="radio" name="correct_answer_1" class="form-check-input" value="C">
+                            </div>
+                            <div class="col">
+                                <input type="text" data-error_text='option' class="form-control required option3" placeholder="Option C">
+                            </div>
+                        </div>
+                        
+                        <div class="row align-items-center mb-2">
+                            <div class="col-auto">
+                                <input type="radio" name="correct_answer_1" class="form-check-input" value="D">
+                            </div>
+                            <div class="col">
+                                <input type="text" data-error_text='option' class="form-control required option4" placeholder="Option D">
+                            </div>   
+                        </div>
+                        
+            
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class=' btn-container'>
+            <div class="d-flex gap-2 justify-content-end mt-3">
+                <button type="button" class="btn btn-purple add_more">
+                <i class="bi bi-plus-circle"></i> Add More
+                </button>
+                &nbsp;
+                {% if quiz %}
+                    <button class="btn update_button btn-primary" data-action='update'>
+                        <svg width="13" height="14" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.9459 3.61332L13.0601 0.712777C12.8694 0.523045 12.6113 0.416534 12.3423 0.416534C12.0733 0.416534 11.8152 0.523045 11.6245 0.712777L1.39397 10.9286L0.459898 14.9599C0.427676 15.1072 0.428781 15.2599 0.463131 15.4068C0.497482 15.5537 0.564212 15.6911 0.658445 15.8088C0.752678 15.9266 0.872035 16.0219 1.00779 16.0876C1.14356 16.1534 1.29229 16.188 1.44313 16.1889C1.51342 16.196 1.58424 16.196 1.65453 16.1889L5.73004 15.2548L15.9459 5.04885C16.1356 4.85815 16.2421 4.60009 16.2421 4.33108C16.2421 4.06208 16.1356 3.80402 15.9459 3.61332ZM5.23842 14.3699L1.41855 15.1713L2.28872 11.4251L9.94321 3.80014L12.8929 6.74984L5.23842 14.3699ZM13.5517 6.037L10.602 3.08729L12.3128 1.38629L15.2134 4.336L13.5517 6.037Z" fill="white"/>
+                        </svg>
+                    Update
+                    </button>
+                    &nbsp;
+                    <a href="{% url 'dashboard:update_quiz' quiz.id %}" class="btn reset_update_page btn-danger">
+                        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.7956 7.69937C13.7956 8.07096 14.0968 8.37219 14.4684 8.37219C14.84 8.37219 15.1413 8.07096 15.1413 7.69937C15.1413 3.28211 11.8776 0.298391 7.87093 0.298279C4.76964 0.298279 2.1569 1.90435 1.1407 4.53498L1.04739 4.79255L1.02834 4.85891C0.9524 5.19125 1.13932 5.53379 1.46922 5.64541C1.79908 5.75695 2.15501 5.59808 2.29646 5.28797L2.32208 5.22358L2.39436 5.02449C3.18104 2.98687 5.23364 1.64393 7.87093 1.64393C11.1521 1.64404 13.7956 4.04287 13.7956 7.69937Z" fill="white"/>
+                            <path d="M0.338623 7.69935C0.338623 12.1166 3.60229 15.1003 7.60896 15.1004C10.7109 15.1004 13.323 13.4943 14.3392 10.8637L14.4325 10.6062L14.4515 10.5398C14.5275 10.2075 14.3406 9.86492 14.0107 9.75331C13.6808 9.64176 13.3249 9.80063 13.1834 10.1107L13.1578 10.1751L13.0855 10.3742C12.2989 12.4119 10.2469 13.7548 7.60896 13.7548C4.32778 13.7547 1.68428 11.3558 1.68428 7.69935C1.68428 7.32775 1.38304 7.02652 1.01145 7.02652C0.639858 7.02652 0.338623 7.32775 0.338623 7.69935Z" fill="white"/>
+                            <path d="M1.05138 5.23747C1.16714 5.5581 1.50922 5.74499 1.84707 5.66061L4.53838 4.98779L4.60474 4.96807C4.92537 4.85231 5.11226 4.51023 5.02788 4.17238C4.94337 3.83432 4.6171 3.62005 4.2795 3.66907L4.21248 3.68287L2.17297 4.19275L1.66375 2.1539C1.57364 1.79346 1.20879 1.57437 0.848345 1.66439C0.4879 1.7545 0.268815 2.11935 0.358838 2.4798L1.03166 5.1711L1.05138 5.23747Z" fill="white"/>
+                            <path d="M13.8155 13.245C13.9056 13.6055 14.2704 13.8246 14.6309 13.7345C14.9913 13.6444 15.2104 13.2796 15.1204 12.9191L14.4475 10.2278C14.3574 9.86739 13.9926 9.6483 13.6321 9.73833L10.9408 10.4112L10.8745 10.4309C10.5538 10.5466 10.3669 10.8887 10.4513 11.2266C10.5358 11.5646 10.8621 11.7789 11.1997 11.7299L11.2667 11.7161L13.3056 11.2068L13.8155 13.245Z" fill="white"/>
+                        </svg>
+                        Reset
+                    </a>
+                {% else %}
+                    <button class="btn btn-primary save_button" data-action="save">
+                        Save Quiz
+                    </button>
+                    <a href="{% url 'dashboard:quiz' %}" class="btn reset_page btn-danger">
+                        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.7956 7.69937C13.7956 8.07096 14.0968 8.37219 14.4684 8.37219C14.84 8.37219 15.1413 8.07096 15.1413 7.69937C15.1413 3.28211 11.8776 0.298391 7.87093 0.298279C4.76964 0.298279 2.1569 1.90435 1.1407 4.53498L1.04739 4.79255L1.02834 4.85891C0.9524 5.19125 1.13932 5.53379 1.46922 5.64541C1.79908 5.75695 2.15501 5.59808 2.29646 5.28797L2.32208 5.22358L2.39436 5.02449C3.18104 2.98687 5.23364 1.64393 7.87093 1.64393C11.1521 1.64404 13.7956 4.04287 13.7956 7.69937Z" fill="white"/>
+                            <path d="M0.338623 7.69935C0.338623 12.1166 3.60229 15.1003 7.60896 15.1004C10.7109 15.1004 13.323 13.4943 14.3392 10.8637L14.4325 10.6062L14.4515 10.5398C14.5275 10.2075 14.3406 9.86492 14.0107 9.75331C13.6808 9.64176 13.3249 9.80063 13.1834 10.1107L13.1578 10.1751L13.0855 10.3742C12.2989 12.4119 10.2469 13.7548 7.60896 13.7548C4.32778 13.7547 1.68428 11.3558 1.68428 7.69935C1.68428 7.32775 1.38304 7.02652 1.01145 7.02652C0.639858 7.02652 0.338623 7.32775 0.338623 7.69935Z" fill="white"/>
+                            <path d="M1.05138 5.23747C1.16714 5.5581 1.50922 5.74499 1.84707 5.66061L4.53838 4.98779L4.60474 4.96807C4.92537 4.85231 5.11226 4.51023 5.02788 4.17238C4.94337 3.83432 4.6171 3.62005 4.2795 3.66907L4.21248 3.68287L2.17297 4.19275L1.66375 2.1539C1.57364 1.79346 1.20879 1.57437 0.848345 1.66439C0.4879 1.7545 0.268815 2.11935 0.358838 2.4798L1.03166 5.1711L1.05138 5.23747Z" fill="white"/>
+                            <path d="M13.8155 13.245C13.9056 13.6055 14.2704 13.8246 14.6309 13.7345C14.9913 13.6444 15.2104 13.2796 15.1204 12.9191L14.4475 10.2278C14.3574 9.86739 13.9926 9.6483 13.6321 9.73833L10.9408 10.4112L10.8745 10.4309C10.5538 10.5466 10.3669 10.8887 10.4513 11.2266C10.5358 11.5646 10.8621 11.7789 11.1997 11.7299L11.2667 11.7161L13.3056 11.2068L13.8155 13.245Z" fill="white"/>
+                        </svg>
+                        Reset
+                    </a>
+            
+                {% endif %}
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block script %}
+    <script>
+
+        function resetFields(){
+            $("input:not([type='checkbox'],[name='csrfmiddlewaretoken']),select ,textarea").val(""); 
+            $(".save_button").removeAttr("disabled");
+            $(".update_button").removeAttr("disabled");;
+            $(".add_more").show();
+            $(".error-message").remove();
+            $(".required").removeClass("error");
+            $(".select2-selection__rendered").removeClass("error");
+            $(".extra_question_div").remove();
+        }
+        
+        $(document).ready(function(){
+            $('.quiz_menu').addClass('active open');
+			$('.quiz_menu').find('.child1').addClass('active').show(); 
+			$('.all_quiz_menu').addClass('active');
+			$('.all_quiz_menu').parent().addClass('active');
+            let index = {{ quiz_questions|length|default:1 }};
+           
+            $(document).on("click", ".add_more", function(){
+                {% comment %} console.log('gkj')
+                let is_valid = IsValidFields();
+                if(!is_valid.is_valid){
+                    errorMessage("Please fill all required fields");
+                    return;
+                } {% endcomment %}
+            
+                index++;
+                console.log(' quiz_questions', index)
+                let clone = `
+                <div class="row question_div extra_question_div mt-2">
+                    <input type="hidden" class="form-control optional question_id" name='question_id' value="0" >
+                   
+                    <div class="row gx-4">
+                        <hr>
+                        <div class="col-12 d-flex justify-content-end">
+                        <i class="fa fa-trash text-danger remove_question"></i>
+                        </div>
+                        <div class="col-lg-8 col-12">
+                            <label class="form-label">Question<span class="required_text">*</span></label>
+                            <textarea class="form-control required question_text" name='question_text' rows="2" placeholder="Enter question"></textarea>
+                        </div>
+            
+                        <div class="col-lg-2 col-6">
+                            <label class="form-label">Order<span class="required_text">*</span></label>
+                            <input type="number" class="form-control required question_order" name='question_order' min="1" >
+                        </div>
+                    </div>
+            
+                    <div class="mt-3">
+                        <label class="form-label}">Options (Select correct answer)<span class="required_text">*</span></label>
+            
+                        <div class="row align-items-center mb-2">
+                            <div class="col-auto">
+                                <input type="radio" name="correct_answer_${index}" class="form-check-input" value="A">
+                            </div>
+                            <div class="col">
+                                <input type="text" data-error_text='option' class="form-control required option1" placeholder="Option A">
+                            </div>
+                        </div>
+                        
+                        <div class="row align-items-center mb-2">
+                            <div class="col-auto">
+                                <input type="radio" name="correct_answer_${index}" class="form-check-input" value="B">
+                            </div>
+                            <div class="col">
+                                <input type="text" data-error_text='option' class="form-control required option2" placeholder="Option B">
+                            </div>
+                        </div>
+                        
+                        <div class="row align-items-center mb-2">
+                            <div class="col-auto">
+                                <input type="radio" name="correct_answer_${index}" class="form-check-input" value="C">
+                            </div>
+                            <div class="col">
+                                <input type="text" data-error_text='option' class="form-control required option3" placeholder="Option C">
+                            </div>
+                        </div>
+                        
+                        <div class="row align-items-center mb-2">
+                            <div class="col-auto">
+                                <input type="radio" name="correct_answer_${index}" class="form-check-input" value="D">
+                            </div>
+                            <div class="col">
+                                <input type="text" data-error_text='option' class="form-control required option4" placeholder="Option D">
+                            </div>   
+                        </div>
+                        
+            
+                    </div>
+                  </div>
+                `;
+            
+                $(".question_container").append(clone);
+            });
+        
+        
+            $(document).on("click", ".remove_question", function(){
+                $(this).closest(".extra_question_div").slideUp(300, function(){
+                $(this).remove();
+                });
+            });
+        
+            $(".save_button, .update_button").click(function() {
+                let btn = $(this);
+                let btn_data = btn.data('btn');
+                let is_valid = IsValidFields();
+                if (!is_valid.is_valid) {
+                    errorMessage("Please fill all required fields and select a correct answer for each question.");
+                    return;
+                }
+            
+                let questions = [];
+                let validation_error = false;
+
+                $(".question_div").each(function(index) {
+                    let question_text = $(this).find(".question_text").val();
+                    let question_order = $(this).find(".question_order").val();
+                    let question_id = $(this).find(".question_id").val();
+                
+                    let options = [
+                        $(this).find(".option1").val(),
+                        $(this).find(".option2").val(),
+                        $(this).find(".option3").val(),
+                        $(this).find(".option4").val()
+                    ];
+                
+                    let correct_answer = $(this).find("input[name='correct_answer_" + (index+1) + "']:checked").val();
+                
+                    if (!correct_answer) {
+                        errorMessage(`Please select a correct answer for the question: "${question_text}"`);
+                        validation_error = true;
+                        return false; 
+                    }
+                
+                    questions.push({
+                        text: question_text,
+                        order: question_order,
+                        options: options,
+                        correct_answer: correct_answer,
+                        question_id: question_id 
+                    });
+                });
+                
+
+                if (validation_error) return; 
+ 
+                let data_ = is_valid.form_data;
+
+                let action = btn.data("action");
+
+                
+                data_.append("action", action);
+                data_.append("questions", JSON.stringify(questions));
+                btn.attr("disabled", true);
+
+                $.ajax({
+                    url: "{% url 'dashboard:all_quiz' %}",
+                    method: "POST",
+                    data: data_,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    beforeSend: function(xhr, settings) {
+                        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                    },
+                    
+                    success: function(response) {
+                        if(response.status === 1){
+                            successMessage("Quiz saved successfully");
+                            setTimeout(() => {
+                                window.location.href = "{% url 'dashboard:all_quiz' %}";
+                            }, 1000);
+                        } else if(response.status === 10){
+                            successMessage("Quiz updated successfully");
+                            setTimeout(() => {
+                                window.location.href = "{% url 'dashboard:all_quiz' %}";
+                            }, 1000);
+                        } else if(response.status === 2){
+                            errorMessage("Quiz for this week already exists.");
+                            btn.removeAttr("disabled");
+                        } else {
+                            errorMessage("Something went wrong");
+                            btn.removeAttr("disabled");
+                        }
+                    },
+                    error: function() {
+                        errorMessage("Something went wrong");
+                        btn.removeAttr("disabled");
+                    }
+                });
+            });
+
+            $(document).on('click', '.btn-delete', function (e) {
+                e.preventDefault();
+            
+                let question_id = $(this).attr("data-id");
+                let name = $(this).attr("data-name");
+            
+                $.confirm({
+                    title: `Do you want to delete this quiz question "${name}"?`,
+                    content: '<span class="delete_content">Are you sure you want to continue?</span>',
+                    theme: 'material',
+                    buttons: {
+                        confirm: {
+                            text: 'Yes',
+                            btnClass: 'btn-danger',
+                            keys: ['enter'],
+                            action: function () {
+                                $.ajax({
+                                    url: "{% url 'dashboard:all_quiz' %}",
+                                    method: "POST",
+                                    data: {
+                                        question_id: question_id,
+                                        action: "delete_quiz_question"
+                                    },
+                                    beforeSend: function(xhr, settings) {
+                                        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                                    },
+                                    success: function (data) {
+                                        if (data.status === 1) {
+                                            successMessage("Quiz Question deleted successfully.");
+                                            setTimeout(function () {
+                                                location.reload();
+                                            }, 1000);
+                                        }
+                                        else {
+                                            errorMessage("Sorry, something went wrong.");
+                                        }
+                                    },
+                                    error: function () {
+                                        errorMessage("Sorry, something went wrong.");
+                                    }
+                                });
+                            }
+                        },
+                        cancel: {
+                            text: 'No',
+                            btnClass: 'btn-secondary',
+                            keys: ['esc'],
+                            action: function () {
+                                
+                            }
+                        }
+                    }
+                });
+            });
+
+            $("#btn_random, #btn_previous").click(function () {
+
+                let btn_id = $(this).attr("id");
+                let count = $("#question_count").val();
+            
+                let type = "";
+            
+                if (btn_id === "btn_random") {
+                    type = "random";  
+                } else {
+                    type = "previous";
+                }
+
+                if (!count || count <= 0) {
+                    errorMessage("Enter how many questions you want to load");
+                    return;
+                }
+            
+                $.ajax({
+                    url: "{% url 'dashboard:load_questions' %}",  
+                    type: "GET",
+                    data: {
+                        count: count,
+                        type: type
+                    },
+            
+                    success: function (response) {
+                        $(".question_container").hide();
+                        $(".btn-container").hide();
+                        $(".question_container").find(".required").removeClass("required");
+
+                        $(".content_body").html(response);
+                    }
+                });
+            
+            });
+            
+            $(document).on("change", "#select_all", function () {
+                $(".question_checkbox").prop("checked", $(this).prop("checked"));
+            });
+
+            $(document).on("change", ".question_checkbox", function () {
+
+                let total = $(".question_checkbox").length;
+                let checked = $(".question_checkbox:checked").length;
+            
+                $("#select_all").prop("checked", total === checked);
+            });
+            
+            $(document).on("click", "#btn_submit_selected", function () {
+                let is_valid = IsValidFields();
+                if (!is_valid.is_valid) {
+                    errorMessage("Please fill all required fields and select at least one question");
+                    return;
+                }
+                
+                let selected_ids = [];
+            
+                $(".question_checkbox:checked").each(function () {
+                    selected_ids.push($(this).val());
+                });
+            
+                if (selected_ids.length === 0) {
+                    errorMessage("Please select at least one question");
+                    return;
+                }
+                let data_ = is_valid.form_data;
+                data_.append("question_ids", JSON.stringify(selected_ids));
+
+                $.ajax({
+                    url: "{% url 'dashboard:load_questions' %}",
+                    type: "POST",
+                    data: data_,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    beforeSend: function(xhr, settings) {
+                        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                    },
+                    success: function (data) {
+            
+                        if (data.status === 1) {
+                            successMessage("Quiz added successfully");
+                            setTimeout(function () {
+                                location.replace(data.preview_url);
+                            }, 1200);
+                        } else {
+                            errorMessage("Something went wrong");
+                        }
+                    }
+                });
+            
+            });
+            
+        
+        });
+    </script>
+{% endblock %}

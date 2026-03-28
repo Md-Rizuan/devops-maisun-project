@@ -1,0 +1,148 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}
+	প্রশ্ন
+{% endblock %}
+
+{% block style %}
+	<style>
+		td,th{
+			text-align:center;
+			vertical-align: middle;
+		}
+        .edit_preview{
+			max-width: 70px; 
+			max-height: 70px; 
+			margin-right: 10px; 
+			margin-bottom: 10px;
+		} 
+		.btn{
+			padding: 4px 10px !important;
+		}
+		.notyf__icon--success {
+			color: #135F5A !important;
+		}
+		
+	</style>
+{% endblock %}
+
+{% block main_content %}
+
+<div class="content_parent">
+    <div class="container-fluid">
+        <div class="row">
+			
+            <div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="card custom-card">
+					<div class='card-header d-flex justify-content-between mb-2'>
+						<h4 class="top_title__"> Number of question - {{total_question}}</h4>
+					</div>
+					<div class="list_holder card-body overflow-auto">
+						<table class="table table-bordered text-nowrap w-100 table-striped table-hover" id='responsiveDataTable'>
+                            <thead class="table-th-primary">
+                                <tr>
+                                    <th style='width:30%'>Question</th>
+                                    <th style='width:50%'>Options</th>
+                                    <th style='width:20%'>Correct Answer</th>
+                                   
+                                </tr>
+                            </thead>
+                            <tbody class="content_body">
+                                {% for question in questions %}
+                                    <tr data-id="{{ question.id }}">
+                                       
+                                        <td>{{ question.text }}</td>
+                        
+                                        <td>
+                                            A. {{ question.option_a }}<br>
+                                            B. {{ question.option_b }}<br>
+                                            C. {{ question.option_c }}<br>
+                                            D. {{ question.option_d }}
+                                        </td>
+                        
+                                        <td>
+                                            {% if question.correct_answer == "A" %} A. {{ question.option_a }}
+                                            {% elif question.correct_answer == "B" %} B. {{ question.option_b }}
+                                            {% elif question.correct_answer == "C" %} C. {{ question.option_c }}
+                                            {% elif question.correct_answer == "D" %} D. {{ question.option_d }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                    <tr>
+                                        <td class='text-center' colspan="4">No Question exists.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                                                
+					</div>
+                </div>
+            </div>
+		 <div class="col-lg-12 ">
+                {% if questions.has_other_pages %}
+                    <br/>
+                    <div style="position:relative;">
+                        <ul class="pagination" style="position:absolute;right:0px;">
+                            {% if questions.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ questions.previous_page_number }}"
+                                       tabindex="-1">
+                                        &laquo;
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                            {% for num in questions.paginator.page_range %}
+                                {% if questions.number == num %}
+                                    <li class="page-item">
+                                        <a class="page-link active" href="#">{{ num }} <span class="sr-only">(current)</span></a>
+                                    </li>
+                                {% elif num > questions.number|add:'-3' and num < questions.number|add:'3' %}
+                                    <li
+                                            class="page-item">
+                                        <a class="page-link" href="?page={{ num }}">
+                                            {{ num }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if questions.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ questions.next_page_number }}"
+                                       tabindex="-1">
+                                        &raquo;
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <br/><br/><br/><br/>
+            </div>
+            
+        </div>
+    </div>
+</div>
+	
+{% endblock %}
+
+{% block script %}
+	<script>
+	
+		
+		$(document).ready(function(){
+
+			let url = window.location.href;
+			let sliced = url.indexOf("action") > 0 ? url.slice(url.indexOf("action")) : "";
+			$("a.page-link").each(function () {
+				this.href += sliced ? "&" + sliced : sliced;
+			});
+			
+
+		});
+		
+	</script>
+{% endblock %}
+

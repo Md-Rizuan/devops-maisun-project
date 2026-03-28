@@ -1,0 +1,320 @@
+{% extends 'home/base.html' %}
+
+{% block title %} Book {% endblock %} | {{app_name}}
+
+{% block style %}
+<link rel="stylesheet" href="{{home_theme_server}}/css/book.css?v=1">
+  <style>
+    
+
+  </style>
+{% endblock %}
+
+
+{% block maincontent %}
+ 
+  <div class="wrapper">
+    <section class="reading-section py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          
+          <div class="col-md-6 col-12 text-center text-md-start mb-4 mb-md-0">
+            <h2 class="reading-title text-light brush-font">
+              READING <br>
+              UNITES ALL <br>
+              GENERATIONS
+            </h2>
+          </div>
+          
+          <div class="col-md-6 col-12 text-center position-relative mt-3">
+            <div class="book-stack">
+              
+              <div class="book-bg-shape pt-3">
+                <svg width="660" height="560" viewBox="0 0 660 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M390.488 1.46341C439.429 -4.11146 483.623 31.0439 489.198 79.9846C491.088 96.5836 488.291 112.635 481.862 126.821C474.825 142.968 470.141 150.095 489.634 195.908C491.184 199.288 492.663 202.71 494.07 206.173C517.493 259.626 528.592 263.3 558.149 271.369C610.751 284.487 652.214 329.038 658.711 386.073C667.073 459.483 614.341 525.773 540.93 534.136C514.916 537.099 489.797 532.388 467.832 521.806C439.305 508.578 428.816 503.82 375.917 529.842C348.553 544.246 318.104 553.908 285.531 557.619C144.826 573.647 17.7694 472.576 1.74163 331.871C-14.2861 191.167 86.7847 64.1097 227.489 48.082C241.108 46.5307 254.599 46.0771 267.874 46.6496C319.893 47.9232 323.959 40.6295 336.995 27.5357C350.815 13.4679 369.368 3.86929 390.488 1.46341Z" fill="#1553B6"/>
+                </svg>
+              </div>
+
+            <img src="{{home_theme_server}}/images/unwanted_revenge.jpg" alt="Book 1" class="book book-left">
+              <img src="{{home_theme_server}}/images/stone.jpg" alt="Book 2" class="book book-right">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section class="book-carousel-section py-5">
+      <div class="container">
+        <div class="swiper bookSwiper pb-2">
+          <div class="swiper-wrapper">
+
+            <a class="swiper-slide book-slide" href="{% url 'core:book_details' %}">
+              <div class="book-circle"></div>
+              <img src="{{home_theme_server}}/images/unwanted_revenge.jpg" alt="Book 1" class="book-img">
+              <h5 class="book-title ">Unwanted Revenge</h5>
+              <p class="book-price text-primary">TK120</p>
+            </a>
+
+      
+            <div class="swiper-slide book-slide">
+              <div class="book-circle"></div>
+              <img src="{{home_theme_server}}/images/spoken_english.png" alt="Book 2" class="book-img">
+              <h5 class="book-title ">Spoken English</h5>
+              <p class="book-price text-primary">TK120</p>
+            </div>
+
+            <div class="swiper-slide book-slide">
+              <div class="book-circle"></div>
+              <img src="{{home_theme_server}}/images/vocabulary.jpg" alt="Book 3" class="book-img">
+              <h5 class="book-title ">Vocabulary</h5>
+              <p class="book-price text-primary">TK120</p>
+            </div>
+
+            <div class="swiper-slide book-slide">
+              <div class="book-circle"></div>
+              <img src="{{home_theme_server}}/images/stone.jpg" alt="Book 4" class="book-img">
+              <h5 class="book-title ">The Emerald Stone</h5>
+              <p class="book-price text-primary">TK120</p>
+            </div>
+
+
+            <div class="swiper-slide book-slide">
+              <div class="book-circle"></div>
+              <img src="{{home_theme_server}}/images/vocabulary1.jpg" alt="Book 5" class="book-img ">
+              <h5 class="book-title">Vocabulary</h5>
+              <p class="book-price text-primary">TK75</p>
+            </div>
+
+          </div>
+
+          <div class="swiper-button-prev book-swiper-button-prev"></div>
+          <div class="swiper-button-next book-swiper-button-next"></div>
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="book-promo-section py-5">
+      <div class="container">
+        <div class="row g-4 align-items-stretch">
+
+          <div class="col-md-6 col-12">
+            <div class="book-promo-card promo-left d-flex justify-content-center text-white">
+              <div class="promo-book-stack position-relative ">
+                <img src="{{home_theme_server}}/images/spoken_english.png" alt="Book 1" class="promo-book-item promo-book-left">
+                <img src="{{home_theme_server}}/images/vocabulary.jpg" alt="Book 2" class="promo-book-item promo-book-center">
+                <img src="{{home_theme_server}}/images/vocabulary1.jpg" alt="Book 3" class="promo-book-item promo-book-right">
+              </div>
+              <div class="book-promo-text">
+                <h3 class="fw-bold mb-2 text-light">A BOOK IS A GIFT THAT LASTS FOREVER</h3>
+                <p class="mb-3">Why not send the gift a book to family & friends</p>
+                <a href="#" class="btn buy-btn text-danger fw-semibold px-4 py-2">Buy Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-12 mx-3 mx-md-0">
+            <div class="book-promo-card promo-right row align-items-center text-white">
+              <div class="promo-book-single col-md-6 text-center">
+                <img src="{{home_theme_server}}/images/stone.jpg" alt="Book" class="promo-book-single-img">
+              </div>
+              <div class="promo-text-content text-start col-md-6">
+                <p class="mb-1 yellow-dot-badge text-light"> Novels Every Day</p>
+                <h1 class="fw-bold mb-0 text-light">SALE 10% OFF</h1>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="fav-reads-section position-relative py-5">
+      <h2 class="fav-bg-text">FAVOURITE</h2>
+
+      <div class="container">
+        <h2 class="text-center mb-5">
+          Our Favourite <span class="text-accent">READS</span>
+        </h2>
+
+        <div class="fav-reads-box rounded-4 shadow-sm p-4">
+          <div class="row g-4 align-items-start">
+
+            <div class="col-md-4 col-12">
+              <div class="fav-list d-flex flex-column gap-3">
+
+                <div class="fav-list-item d-flex align-items-center gap-3">
+                  <img src="{{home_theme_server}}/images/spoken_english.png" alt="Book" class="fav-thumb">
+                  <div>
+                    <p class="fav-title mb-1">ছোটদের Spoken English</p>
+                    <p class="fav-price text-primary mb-1">TK120</p>
+                    <div class="fav-stars">⭐️⭐️⭐️⭐️⭐️</div>
+                  </div>
+                </div>
+                <hr>
+                <div class="fav-list-item d-flex align-items-center gap-3">
+                  <img src="{{home_theme_server}}/images/vocabulary.jpg" alt="Book" class="fav-thumb">
+                  <div>
+                    <p class="fav-title mb-1">ছোটদের Vocabulary</p>
+                    <p class="fav-price text-primary mb-1">TK120</p>
+                    <div class="fav-stars">⭐️⭐️⭐️⭐️⭐️</div>
+                  </div>
+                </div>
+                <hr>
+                <div class="fav-list-item d-flex align-items-center gap-3">
+                  <img src="{{home_theme_server}}/images/vocabulary1.jpg" alt="Book" class="fav-thumb">
+                  <div>
+                    <p class="fav-title mb-1">ছোটদের Vocabulary</p>
+                    <p class="fav-price text-primary mb-1">TK75</p>
+                    <div class="fav-stars">⭐️⭐️⭐️⭐️⭐️</div>
+                  </div>
+                </div>
+                <hr>
+                <div class="fav-list-item d-flex align-items-center gap-3">
+                  <img src="{{home_theme_server}}/images/spoken_english2.png" alt="Book" class="fav-thumb">
+                  <div>
+                    <p class="fav-title mb-1">ছোটদের Spoken English</p>
+                    <p class="fav-price text-primary mb-1">TK75</p>
+                    <div class="fav-stars">⭐️⭐️⭐️⭐️⭐️</div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="col-md-8 col-12">
+              <div class="d-flex flex-wrap justify-content-center gap-4">
+
+                <a class="fav-featured text-center" href="{% url 'core:book_details' %}">
+                  <img src="{{home_theme_server}}/images/unwanted_revenge.jpg" alt="Book" class="fav-featured-img mb-3">
+                  <h5 class="mb-1">Unwanted Revenge</h5>
+                  <div class="fav-stars">⭐️⭐️⭐️⭐️⭐️</div>
+                </a>
+
+                <div class="fav-featured text-center">
+                  <img src="{{home_theme_server}}/images/stone.jpg" alt="Book" class="fav-featured-img mb-3">
+                  <h5 class="mb-1">The Emerald Stone</h5>
+                  <div class="fav-stars">⭐️⭐️⭐️⭐️⭐️</div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="blog-showcase-section py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">
+          Latest <span class="blog-showcase-accent">BLOG POST</span>
+        </h2>
+
+        <div class="blog-showcase-wrapper p-4 rounded-4 shadow-sm">
+
+          <div class="blog-showcase-grid">
+
+            <div class="blog-showcase-side">
+              <div class="blog-showcase-item">
+                <img src="{{home_theme_server}}/images/blog1.jpg" alt="Reading is ageless">
+                <div class="blog-showcase-meta">
+                  <small>November 14, 2024</small>
+                  <p>Reading is ageless</p>
+                </div>
+              </div>
+
+              <div class="blog-showcase-item">
+                <img src="{{home_theme_server}}/images/blog2.jpg" alt="Books are for every stage of life">
+                <div class="blog-showcase-meta">
+                  <small>June 15, 2025</small>
+                  <p>Books are for every stage of life</p>
+                </div>
+              </div>
+
+              <div class="blog-showcase-item">
+                <img src="{{home_theme_server}}/images/blog3.jpg" alt="Books are timeless gifts">
+                <div class="blog-showcase-meta">
+                  <small>June 17, 2025</small>
+                  <p>Books are timeless gifts.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="blog-showcase-featured text-white">
+              <img src="{{home_theme_server}}/images/blog.jpg" alt="Reading is for all ages" class="blog-showcase-featured-img">
+              <div class="blog-showcase-overlay">
+                <h3>Reading is for all ages</h3>
+              </div>
+            </div>
+
+            <div class="blog-showcase-side">
+              <div class="blog-showcase-item">
+                <img src="{{home_theme_server}}/images/blog4.jpg" alt="Every age, every page">
+                <div class="blog-showcase-meta">
+                  <small>November 14, 2024</small>
+                  <p>Every age, every page</p>
+                </div>
+              </div>
+
+              <div class="blog-showcase-item">
+                <img src="{{home_theme_server}}/images/blog5.jpg" alt="Books are timeless companions">
+                <div class="blog-showcase-meta">
+                  <small>June 15, 2025</small>
+                  <p>Books are timeless companions</p>
+                </div>
+              </div>
+
+              <div class="blog-showcase-item">
+                <img src="{{home_theme_server}}/images/blog6.jpg" alt="Stories belong to everyone">
+                <div class="blog-showcase-meta">
+                  <small>June 17, 2025</small>
+                  <p>Stories belong to everyone</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+    
+{% endblock %}
+
+{% block script %}
+  <script>
+    $(document).ready(function () {
+
+    
+      $(".book-menu").addClass("header-border");
+      setTimeout(function() {
+        $(".book-menu").addClass("active");
+      }, 100);
+
+
+      const bookSwiper = new Swiper(".bookSwiper", {
+        slidesPerView: 4,
+        spaceBetween: 20,
+        centeredSlides: true,
+        loop: true,
+        navigation: {
+          nextEl: ".book-swiper-button-next",
+          prevEl: ".book-swiper-button-prev",
+        },
+        breakpoints: {
+          1024: { slidesPerView: 4 },
+          768: { slidesPerView: 3 },
+          480: { slidesPerView: 1 },
+          0: { slidesPerView: 1 },
+        },
+      });
+
+
+    });
+</script>
+
+{% endblock %}

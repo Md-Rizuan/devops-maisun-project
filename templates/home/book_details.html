@@ -1,0 +1,223 @@
+{% extends 'home/base.html' %}
+
+{% block title %} Book Details {% endblock %} | {{app_name}}
+
+{% block style %}
+<link rel="stylesheet" href="{{home_theme_server}}/css/book_details.css?v=1">
+  <style>
+    
+
+  </style>
+{% endblock %}
+
+
+{% block maincontent %}
+ 
+  <div class="wrapper">
+    <section class="book-detail py-5">
+        <div class="container">
+            <div class="book-detail-card">
+
+            <div class="book-left">
+                <div class="book-cover-frame">
+                <div class="book-inner-panel">
+                    <div class="book-cover-wrapper">
+                    <img src="{{home_theme_server}}/images/unwanted_revenge.jpg" alt="Book cover" class="book-cover">
+                    <div class="book-half-bg" aria-hidden="true"></div>
+                    </div>
+                </div>
+                <div class="wishlist-icon">
+                    <svg width="48" height="49" viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24 0.899384C10.7452 0.899384 0 11.6445 0 24.8994C0 38.1542 10.7452 48.8994 24 48.8994C37.2548 48.8994 48 38.1542 48 24.8994C48 11.6445 37.2548 0.899384 24 0.899384ZM29.3116 14.6395C32.1634 14.5949 34.7424 16.1453 35.965 18.7885C37.096 22.2827 36.1495 25.8375 34.155 28.5164C32.8385 30.3331 31.2651 31.8998 29.6565 33.2687C28.1766 34.6463 24.8642 37.3723 23.9863 37.448C23.2104 37.2997 22.3394 36.4209 21.7234 35.9693C18.262 33.3381 14.5367 30.1396 12.6474 26.641C11.0634 23.2822 11.0605 19.1265 13.5258 16.5514C16.7225 13.6695 21.5414 14.2335 23.9863 17.2444C24.6429 16.3926 25.4505 15.7217 26.4088 15.2337C27.38 14.8461 28.3609 14.6544 29.3116 14.6395Z" fill="#FF6060"/>
+                    </svg>
+                </div>
+
+                
+                </div>
+            </div>
+
+            <div class="book-right">
+                <span class="stock-badge">In Stock</span>
+
+                <h1 class="book-title">Unwanted Revenge</h1>
+
+                <p class="book-author">Author: <strong>Umme Maisun</strong></p>
+
+                <div class="book-rating">★ ★ ★ ★ ★ <span class="rating-num text-dark">5</span></div>
+
+                <hr class="divider">
+
+                <div class="price-row">
+                <div class="price">TK120</div>
+                <span class="pdf-badge">PDF</span>
+                </div>
+
+                <p class="book-desc">
+                <strong>Unwanted Revenge</strong> by Umme Maisun is a gripping tale of betrayal, resilience, and justice. 
+                The story follows a journey where pain transforms into strength and revenge becomes a path of self-discovery. With suspense, emotional depth, and unexpected twists, 
+                it keeps readers hooked until the very last page. A must-read for fans of intense drama and powerful storytelling..
+                </p>
+
+                <div class="row controls-row align-items-center">
+                <div class="col-auto qty-col">
+                    <label class="qty-label">Quantity</label>
+                    <div class="qty-control">
+                    <button class="qty-btn qty-minus">−</button>
+                    <input type="text" class="qty-input" value="1" readonly>
+                    <button class="qty-btn qty-plus">+</button>
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <button class=" buy-btn mt-4">Buy Book</button>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="tab-section py-5">
+       <div class="bookdetail-tabs-container">
+            <div class="bookdetail-tabs-header">
+                <button class="bookdetail-tab-btn active" data-tab="description">Description</button>
+                <button class="bookdetail-tab-btn" data-tab="reviews">Reviews</button>
+            </div>
+
+            <div class="bookdetail-tab-content active" id="description">
+                <div class="bookdetail-content-box">
+                <p>
+                Maisun’s storytelling combines suspense, raw emotions, and unexpected turns that keep the reader guessing with every chapter. 
+                Each page unveils layers of human strength, inner conflict, and the burning desire for redemption. 
+                <strong>Unwanted Revenge</strong> is more than a story of vengeance—it’s a reflection of survival, empowerment, 
+                and the courage to rise above darkness. Perfect for readers who love intense drama, emotional depth, and unforgettable characters. 
+                
+                </p>
+                <p>
+                Unwanted Revenge by Umme Maisun is a powerful novel that explores the dark sides of betrayal, 
+                broken trust, and the thirst for justice. At its heart lies a character torn between pain and resilience, 
+                forced to confront the past while shaping a new destiny. The book takes readers through an emotional rollercoaster—where 
+                heartbreak sparks courage, and revenge is not just an act of retaliation but a journey of reclaiming one’s worth.
+                
+                </p>
+                </div>
+            </div>
+
+            <div class="bookdetail-tab-content" id="reviews">
+                <div class="bookdetail-content-box">
+                <p>No reviews yet!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="book-carousel-section py-5">
+
+        <div class="container">
+            <div class="alsolike-header">
+                <h1>I think you <span class='brush-font'>ALSO LIKE</span></h1>
+            </div>
+            <div class="swiper bookSwiper pb-2">
+            <div class="swiper-wrapper">
+
+                <a class="swiper-slide book-slide" href="{% url 'core:book_details' %}">
+                <div class="book-circle"></div>
+                <img src="{{home_theme_server}}/images/unwanted_revenge.jpg" alt="Book 1" class="book-img">
+                <h5 class="book-title ">Unwanted Revenge</h5>
+                <p class="book-price text-primary">TK120</p>
+                </a>
+
+        
+                <div class="swiper-slide book-slide">
+                <div class="book-circle"></div>
+                <img src="{{home_theme_server}}/images/spoken_english.png" alt="Book 2" class="book-img">
+                <h5 class="book-title ">Spoken English</h5>
+                <p class="book-price text-primary">TK120</p>
+                </div>
+
+                <div class="swiper-slide book-slide">
+                <div class="book-circle"></div>
+                <img src="{{home_theme_server}}/images/vocabulary.jpg" alt="Book 3" class="book-img">
+                <h5 class="book-title ">Vocabulary</h5>
+                <p class="book-price text-primary">TK120</p>
+                </div>
+
+                <div class="swiper-slide book-slide">
+                <div class="book-circle"></div>
+                <img src="{{home_theme_server}}/images/stone.jpg" alt="Book 4" class="book-img">
+                <h5 class="book-title ">The Emerald Stone</h5>
+                <p class="book-price text-primary">TK120</p>
+                </div>
+
+
+                <div class="swiper-slide book-slide">
+                <div class="book-circle"></div>
+                <img src="{{home_theme_server}}/images/vocabulary1.jpg" alt="Book 5" class="book-img ">
+                <h5 class="book-title">Vocabulary</h5>
+                <p class="book-price text-primary">TK75</p>
+                </div>
+
+            </div>
+
+            <div class="swiper-button-prev book-swiper-button-prev"></div>
+            <div class="swiper-button-next book-swiper-button-next"></div>
+            
+            </div>
+        </div>
+    </section>
+
+  </div>
+    
+{% endblock %}
+
+{% block script %}
+  <script>
+    $(document).ready(function () {
+
+    
+        $(".book-menu").addClass("header-border");
+        setTimeout(function() {
+            $(".book-menu").addClass("active");
+        }, 100);
+
+        $(".qty-plus").click(function() {
+            let input = $(this).siblings(".qty-input");
+            let current = parseInt(input.val());
+            input.val(current + 1);
+        });
+
+        $(".qty-minus").click(function() {
+            let input = $(this).siblings(".qty-input");
+            let current = parseInt(input.val());
+            if (current > 1) input.val(current - 1);
+        });
+
+        $(".bookdetail-tab-btn").click(function(){
+            $(".bookdetail-tab-btn").removeClass("active");
+            $(this).addClass("active");
+
+            const tabId = $(this).data("tab");
+            $(".bookdetail-tab-content").removeClass("active");
+            $("#" + tabId).addClass("active");
+        });
+        const bookSwiper = new Swiper(".bookSwiper", {
+            slidesPerView: 4,
+            spaceBetween: 20,
+            centeredSlides: true,
+            loop: true,
+            navigation: {
+            nextEl: ".book-swiper-button-next",
+            prevEl: ".book-swiper-button-prev",
+            },
+            breakpoints: {
+            1024: { slidesPerView: 4 },
+            768: { slidesPerView: 3 },
+            480: { slidesPerView: 1 },
+            0: { slidesPerView: 1 },
+            },
+        });
+    });
+</script>
+
+{% endblock %}

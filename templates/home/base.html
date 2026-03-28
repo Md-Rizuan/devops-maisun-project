@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>{% block title %} Home {% endblock %} | {{ app_name }}</title>
+		<link rel="icon" type="image/png" href="{{static_server}}/img/logo_sm.png">
+	
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+		<!-- Bootstrap core CSS-->
+		<link href="{{home_theme_server}}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Plugins and Icon Fonts-->
+		<link href="{{home_theme_server}}/css/plugins.min.css" rel="stylesheet">
+		<!-- Template core CSS-->
+		<link href="{{home_theme_server}}/css/template.min.css?v=2" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="{{home_theme_server}}/css/style.css?v=2">
+		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+		
+		<style>
+			
+		</style>
+
+		{% block style %}{% endblock %}
+	</head>
+	<body>
+
+		<!-- Layout-->
+		<div class="layout">
+			<!-- Advertisement Bar -->
+			{% comment %} {% if advertisement %} {% endcomment %}
+			{% comment %} <section id="advertisement-bar" class="advertisement-bar align-items-center" style="display: none;">
+				<div class="ad-content d-flex justify-content-between align-items-center">
+					<div class="advertisement-text">Advertisement</div>
+					
+					<button class="btn-close" id="close-advertisement"></button>
+				</div>
+			</section>  {% endcomment %}
+	
+			{% comment %} {% endif %} {% endcomment %}
+
+			<!-- Header-->
+			<header class="header header-center undefined">
+				
+				
+				<div class="container-fluid">
+					
+					
+					<!-- Logos-->
+					<div class="inner-header">
+						<a class="inner-brand" href="{% url 'core:home' %}">
+							<img class="brand-logo" src="{{home_theme_server}}/images/logo.png" alt="Black Logo" style="">
+						</a>
+            		</div>
+					<!-- Navigation-->
+					<div class="inner-navigation collapse">
+						<div class="inner-navigation-inline">
+							<div class="inner-nav">
+								<ul>
+									<!-- home -->
+                  					<li ><a href="{% url 'core:about' %}" ><span class='about-menu pb-1'>About</span></a></li>
+									
+									<li class="menu-item-has-children"><a href="#">Learn English</a>
+										<ul class="sub-menu">
+											<li><a href="#">Speaking</a></li>
+											<li><a href="#">Listening</a></li>
+											<li><a href="#">Reading</a></li>
+											<li><a href="#">Writing</a></li>
+											
+										</ul>
+									</li>
+                   					
+									<li class="">
+										<a href="{% url 'core:quiz' %}">Quiz</a>
+										
+									</li>
+									<li class="menu-item-has-children">
+										<a href="#">Social Work</a>
+										<ul class="sub-menu">
+											
+										</ul>
+									</li>
+
+									<li class="menu-item-has-children"><a href="#">Achievement</a></li>
+									<li ><a href="{% url 'core:book' %}" ><span class="book-menu pb-1"> Books</span></a></li>
+
+                  					<li class=""><a href="{% url 'core:travel' %}"><span class="tavel-menu pb-1">Travel with me</span></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				
+					<!-- Mobile menu-->
+					<div class="nav-toggle"><a href="#" data-bs-toggle="collapse" data-bs-target=".inner-navigation"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a></div>
+				</div>
+			</header>
+			<!-- Header end-->
+			<div class='main-content ' >
+
+				{% block maincontent %} {% endblock %}
+			</div>
+			<div class="newsletter-container  ">
+				<div class="row mx-md-5"> 
+					<p class='newsletter-text col-12 col-lg-6 text-center text-lg-start  align-items-center'>Join my newsletter and receive  more English lessons for free</p>
+					<div class="col-12 col-lg-6 d-flex justify-content-center align-items-center">
+						<div class="subscribe-container mt-3 mt-lg-0 ">
+							<input type="email" placeholder="Email" />
+							<button>Join Now</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Footer HTML -->
+			<footer>
+				
+				<div class="footer-wave">
+					<img src="{{home_theme_server}}/images/half-circle.png" alt="Decorative Wave" class="img-fluid">
+				</div>
+				<div class="footer-container">
+
+					<div class="footer-logo">
+						<img src="{{home_theme_server}}/images/footer_logo.png" alt="Maisun's World">
+					</div>
+					
+					<ul class="footer-nav">
+					<li><a href="{% url 'core:about' %}">About</a></li>
+					<li><a href="#">Learn English</a></li>
+					<li><a href="{% url 'core:quiz' %}">Quiz</a></li>
+					<li><a href="#">Social work</a></li>
+					<li><a href="#">Achievement</a></li>
+					<li><a href="{% url 'core:book' %}">Books</a></li>
+					<li><a href="{% url 'core:travel' %}">Travel with me</a></li>
+					<li><a href="#">Contact</a></li>
+					</ul>
+					<div class="footer-social">
+					<a href="#">
+						<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="23.1052" cy="22.7913" r="22.7581" fill="white"/>
+						<path d="M20.4271 25.9334L27.4337 22.5475L20.4271 19.121V25.9334ZM23.1052 14.2588C24.7266 14.2588 26.2925 14.2791 27.8029 14.3197C29.3132 14.3604 30.4207 14.4033 31.1252 14.4484L32.182 14.5026C32.1917 14.5026 32.2737 14.5093 32.4281 14.5229C32.5825 14.5364 32.6935 14.55 32.7611 14.5635C32.8286 14.5771 32.942 14.5974 33.1013 14.6245C33.2605 14.6516 33.398 14.6877 33.5138 14.7328C33.6297 14.778 33.7648 14.8367 33.9192 14.9089C34.0736 14.9811 34.2232 15.0692 34.368 15.173C34.5127 15.2768 34.6527 15.3965 34.7878 15.5319C34.8457 15.5861 34.9205 15.6696 35.0122 15.7825C35.1038 15.8953 35.2438 16.1594 35.432 16.5748C35.6202 16.9901 35.748 17.4461 35.8156 17.9427C35.8928 18.5205 35.9531 19.1368 35.9966 19.7914C36.04 20.446 36.0665 20.9584 36.0762 21.3286V23.7123C36.0858 25.0215 35.999 26.3307 35.8156 27.6399C35.748 28.1365 35.6274 28.5857 35.4537 28.9875C35.28 29.3893 35.1256 29.667 34.9904 29.8205L34.7878 30.0507C34.6527 30.1861 34.5127 30.3058 34.368 30.4096C34.2232 30.5134 34.0736 30.5992 33.9192 30.6669C33.7648 30.7347 33.6297 30.7911 33.5138 30.8362C33.398 30.8814 33.2605 30.9175 33.1013 30.9446C32.942 30.9717 32.8262 30.992 32.7538 31.0055C32.6814 31.0191 32.5705 31.0326 32.4209 31.0462C32.2713 31.0597 32.1917 31.0665 32.182 31.0665C29.7596 31.238 26.734 31.3238 23.1052 31.3238C21.1075 31.3057 19.3727 31.2764 17.9009 31.2358C16.4291 31.1951 15.4616 31.1613 14.9984 31.1342L14.289 31.08L13.7679 31.0258C13.4204 30.9807 13.1574 30.9356 12.9789 30.8904C12.8004 30.8453 12.5543 30.7505 12.2406 30.606C11.9269 30.4615 11.6543 30.2764 11.4227 30.0507C11.3648 29.9965 11.29 29.913 11.1983 29.8001C11.1066 29.6873 10.9667 29.4232 10.7785 29.0078C10.5903 28.5925 10.4624 28.1365 10.3948 27.6399C10.3176 27.0621 10.2573 26.4458 10.2139 25.7912C10.1705 25.1366 10.1439 24.6242 10.1343 24.254V21.8703C10.1246 20.5611 10.2115 19.2519 10.3948 17.9427C10.4624 17.4461 10.583 16.9969 10.7568 16.5951C10.9305 16.1933 11.0849 15.9156 11.22 15.7621L11.4227 15.5319C11.5578 15.3965 11.6977 15.2768 11.8425 15.173C11.9873 15.0692 12.1369 14.9811 12.2913 14.9089C12.4457 14.8367 12.5808 14.778 12.6966 14.7328C12.8124 14.6877 12.95 14.6516 13.1092 14.6245C13.2684 14.5974 13.3818 14.5771 13.4494 14.5635C13.5169 14.55 13.6279 14.5364 13.7824 14.5229C13.9368 14.5093 14.0188 14.5026 14.0285 14.5026C16.4509 14.3401 19.4764 14.2588 23.1052 14.2588Z" fill="black"/>
+						</svg>
+
+					</a>
+					<a href="#">
+						<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="23.1663" cy="22.7913" r="22.7581" fill="white"/>
+						<path d="M23.6058 12.7716C24.7015 12.7549 25.7888 12.7632 26.8761 12.7549C26.943 14.0345 27.403 15.3393 28.3397 16.2426C29.2765 17.1709 30.5979 17.5975 31.8859 17.7397V21.1103C30.6816 21.0684 29.4688 20.8175 28.3732 20.299C27.8964 20.0815 27.4532 19.8055 27.0182 19.5212C27.0099 21.9634 27.0266 24.4056 27.0015 26.8394C26.9346 28.0104 26.5499 29.1729 25.8724 30.1347C24.7768 31.7406 22.8782 32.7861 20.9294 32.8195C19.7334 32.8864 18.5374 32.5602 17.517 31.958C15.8275 30.9628 14.6399 29.1395 14.4643 27.1823C14.4475 26.7642 14.4392 26.346 14.4559 25.9361C14.6064 24.347 15.3926 22.8248 16.6137 21.7877C18.0021 20.5833 19.9425 20.0063 21.7574 20.3492C21.7742 21.587 21.724 22.8248 21.724 24.0627C20.896 23.795 19.9258 23.8703 19.1981 24.3721C18.6712 24.715 18.2698 25.242 18.0607 25.8358C17.885 26.2623 17.9352 26.7307 17.9436 27.1823C18.1443 28.554 19.4658 29.7082 20.8709 29.5827C21.8076 29.5744 22.7025 29.0307 23.1876 28.2362C23.3466 27.9602 23.5222 27.6758 23.5306 27.3496C23.6142 25.8525 23.5807 24.3638 23.5891 22.8667C23.5975 19.4961 23.5807 16.1338 23.6058 12.7716Z" fill="black"/>
+						</svg>
+
+
+					</a>
+					<a href="#">
+						<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M23.2277 0.0332031C10.6585 0.0332031 0.469482 10.2223 0.469482 22.7914C0.469482 35.3606 10.6585 45.5497 23.2277 45.5497C35.7969 45.5497 45.986 35.3606 45.986 22.7914C45.986 10.2223 35.7969 0.0332031 23.2277 0.0332031ZM28.6186 15.7601H25.1977C24.7923 15.7601 24.3419 16.2935 24.3419 17.0023V19.4725H28.6209L27.9738 22.9953H24.3419V33.5708H20.3047V22.9953H16.6421V19.4725H20.3047V17.4006C20.3047 14.4278 22.3672 12.0121 25.1977 12.0121H28.6186V15.7601Z" fill="white"/>
+						</svg>
+
+					</a>
+					<a href="#">
+						<svg width="49" height="49" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M24.3461 0.975586C37.4899 0.975586 48.1611 11.6468 48.1611 24.7907C48.1611 37.9345 37.4899 48.6057 24.3461 48.6057C11.2022 48.6057 0.531006 37.9345 0.531006 24.7907C0.531006 11.6468 11.2022 0.975586 24.3461 0.975586ZM24.3461 9.90623C20.3037 9.90623 19.7968 9.92335 18.2092 9.99582C16.625 10.0681 15.543 10.3197 14.5961 10.6877C13.6174 11.0681 12.7873 11.577 11.9598 12.4045C11.1323 13.232 10.6234 14.0621 10.243 15.0408C9.87507 15.9875 9.62352 17.0695 9.55115 18.6538C9.47877 20.2414 9.46165 20.7483 9.46165 24.7907C9.46165 28.833 9.47877 29.3399 9.55115 30.9275C9.62352 32.5118 9.87507 33.5938 10.243 34.5405C10.6234 35.5192 11.1323 36.3493 11.9598 37.1769C12.7873 38.0044 13.6174 38.5133 14.5961 38.8937C15.543 39.2616 16.625 39.5132 18.2092 39.5855C19.7968 39.6579 20.3037 39.6751 24.3461 39.6751C28.3884 39.6751 28.8953 39.6579 30.4829 39.5855C32.0672 39.5132 33.1492 39.2616 34.0959 38.8937C35.0747 38.5133 35.9047 38.0044 36.7323 37.1769C37.5598 36.3493 38.0688 35.5192 38.4491 34.5405C38.817 33.5938 39.0686 32.5118 39.1409 30.9275C39.2134 29.3399 39.2305 28.833 39.2305 24.7907C39.2305 20.7483 39.2134 20.2414 39.1409 18.6538C39.0686 17.0695 38.817 15.9875 38.4491 15.0408C38.0688 14.0621 37.5598 13.232 36.7323 12.4045C35.9047 11.577 35.0747 11.0681 34.0959 10.6877C33.1492 10.3197 32.0672 10.0681 30.4829 9.99582C28.8953 9.92335 28.3884 9.90623 24.3461 9.90623ZM24.3461 12.5881C28.3204 12.5881 28.7911 12.6033 30.3607 12.6749C31.8119 12.7412 32.5999 12.9836 33.1244 13.1874C33.8193 13.4574 34.3151 13.78 34.8359 14.3009C35.3568 14.8216 35.6793 15.3176 35.9493 16.0123C36.1531 16.5368 36.3957 17.3248 36.4618 18.776C36.5334 20.3456 36.5486 20.8163 36.5486 24.7907C36.5486 28.765 36.5334 29.2357 36.4618 30.8053C36.3957 32.2565 36.1531 33.0445 35.9493 33.569C35.6793 34.2638 35.3568 34.7597 34.8359 35.2804C34.3151 35.8014 33.8193 36.1239 33.1244 36.3939C32.5999 36.5977 31.8119 36.8402 30.3607 36.9064C28.7914 36.978 28.3207 36.9932 24.3461 36.9932C20.3715 36.9932 19.9008 36.978 18.3315 36.9064C16.8802 36.8402 16.0922 36.5977 15.5677 36.3939C14.8729 36.1239 14.377 35.8014 13.8562 35.2804C13.3353 34.7597 13.0128 34.2638 12.7428 33.569C12.539 33.0445 12.2965 32.2565 12.2302 30.8053C12.1586 29.2357 12.1435 28.765 12.1435 24.7907C12.1435 20.8163 12.1586 20.3456 12.2302 18.776C12.2965 17.3248 12.539 16.5368 12.7428 16.0123C13.0128 15.3176 13.3353 14.8216 13.8562 14.3009C14.377 13.78 14.8729 13.4574 15.5677 13.1874C16.0922 12.9836 16.8802 12.7412 18.3315 12.6749C19.901 12.6033 20.3717 12.5881 24.3461 12.5881ZM24.3461 17.1473C20.1248 17.1473 16.7027 20.5693 16.7027 24.7907C16.7027 29.012 20.1248 32.434 24.3461 32.434C28.5674 32.434 31.9894 29.012 31.9894 24.7907C31.9894 20.5693 28.5674 17.1473 24.3461 17.1473ZM24.3461 29.7521C21.6059 29.7521 19.3846 27.5308 19.3846 24.7907C19.3846 22.0505 21.6059 19.8292 24.3461 19.8292C27.0862 19.8292 29.3075 22.0505 29.3075 24.7907C29.3075 27.5308 27.0862 29.7521 24.3461 29.7521ZM34.0776 16.8453C34.0776 17.8318 33.2778 18.6314 32.2914 18.6314C31.305 18.6314 30.5053 17.8318 30.5053 16.8453C30.5053 15.8589 31.305 15.0592 32.2914 15.0592C33.2778 15.0592 34.0776 15.8589 34.0776 16.8453Z" fill="white"/>
+						</svg>
+
+					</a>
+					<a href="#">
+						<svg width="49" height="49" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="24.8222" cy="24.791" r="24.1162" fill="white"/>
+						<path d="M27.2958 22.8021L36.9654 11.8037H34.6743L26.2744 21.3515L19.5703 11.8037H11.8362L21.9763 26.2429L11.8362 37.7754H14.1273L22.9923 27.6903L30.0737 37.7754H37.8078L27.2958 22.8021ZM24.1568 26.3696L23.1278 24.9309L14.9535 13.4938H18.473L25.0719 22.7273L26.0966 24.1661L34.6732 36.1677H31.1536L24.1568 26.3696Z" fill="#2D2E39"/>
+						</svg>
+
+					</a>
+					<a href="#">
+						<svg width="49" height="49" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="24.5993" cy="24.791" r="24.1162" fill="white"/>
+						<path d="M19.5947 36.017V20.8676H14.7815V36.017H19.5947ZM17.1887 18.798C18.8672 18.798 19.9119 17.6347 19.9119 16.181C19.8806 14.6945 18.8672 13.5635 17.2206 13.5635C15.5742 13.5635 14.4976 14.6945 14.4976 16.181C14.4976 17.6348 15.542 18.798 17.1573 18.798H17.1886H17.1887ZM22.2588 36.017H27.0719V27.5569C27.0719 27.1041 27.1032 26.6518 27.2303 26.3281C27.5782 25.4235 28.3702 24.4865 29.6998 24.4865C31.4415 24.4865 32.1382 25.8758 32.1382 27.9123V36.0169H36.9511V27.3304C36.9511 22.6771 34.5765 20.512 31.4098 20.512C28.8133 20.512 27.6732 22.0303 27.0399 23.0645H27.072V20.8673H22.2589C22.322 22.2889 22.2589 36.0167 22.2589 36.0167L22.2588 36.017Z" fill="black"/>
+						</svg>
+
+					</a>
+					</div>
+					
+
+					<hr>
+					
+					<div class="footer-bottom">
+					<p>Copyright © 2025 All Rights Reserved.</p>
+					<p><a href="#">Terms and Conditions</a> | <a href="#">Privacy Policy</a></p>
+					</div>
+				</div>
+			</footer>
+		</div>
+		<!-- Layout end-->
+
+		<!-- Scripts-->
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+		<script src="{{home_theme_server}}/bootstrap/js/bootstrap.min.js"></script>
+		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
+		<script src="{{home_theme_server}}/js/plugins.min.js?v=1"></script>
+		<script src="{{home_theme_server}}/js/custom.min.js"></script>
+		<script src="{{home_theme_server}}/js/main.js"></script>
+		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+		<script>
+			
+			
+
+		</script>
+		
+		{% block script %} {% endblock %}
+	</body>
+</html>

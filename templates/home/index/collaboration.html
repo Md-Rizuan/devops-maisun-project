@@ -1,0 +1,37 @@
+<br><br>
+<div class="container-fluid collaboration-section"> 
+    <div class="collaboration-overlay"></div>
+
+    <div class="container content-wrapper">
+        <div class="row align-items-center">
+            
+            <div class="col-lg-7 col-md-12 mb-4 text-center text-lg-start">
+                <p class="yellow-dot-badge mb-1 text-light"> COLLABORATION</p>
+                <h1>
+                    <span class='text-light'>Brand </span><span class="fw-bold text-warning brush-font">ENDORSEMENTS</span> <br>
+                    <span class='text-light'>&</span> <span class="fw-bold text-warning brush-font">COLLABORATIONS</span>
+                </h1>
+                <div class="collaboration-brand-logos d-flex flex-wrap justify-content-center justify-content-lg-start mt-3">
+                    
+                    <img class='collaboration-brand-logo' src="{{home_theme_server}}/images/akij.png" alt="Brand 1">
+                    <img class='collaboration-brand-logo' src="{{home_theme_server}}/images/pran.png" alt="Brand 2">
+                    <img class='collaboration-brand-logo'  src="{{home_theme_server}}/images/banglalink.png" alt="Brand 3">
+                    <img class='collaboration-brand-logo' src="{{home_theme_server}}/images/ets.png" alt="Brand 4"> 
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-12">
+                <div class="collaboration-form-box">
+                    <h5 class="text-center fw-bold mb-3">FOR COLLABORATION</h5>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <textarea name="message" rows="4" placeholder="Your Message"></textarea>
+                        <button type="submit" class="submit-btn collaboration-btn">SUBMIT</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

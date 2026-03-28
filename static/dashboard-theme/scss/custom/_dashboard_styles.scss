@@ -1,0 +1,378 @@
+/* Start:: General Dashboard Styles */
+.project-stats {
+  flex: 1;
+}
+.total-profit-svg {
+  -webkit-filter: drop-shadow(0px 2px 5px $primary);
+  filter: drop-shadow(0 2px 5px $primary);
+}
+.total-order-svg {
+  -webkit-filter: drop-shadow(0px 2px 5px $secondary);
+  filter: drop-shadow(0 2px 5px $secondary);
+}
+.total-sales-svg {
+  -webkit-filter: drop-shadow(0px 2px 5px $warning);
+  filter: drop-shadow(0 2px 5px $warning);
+}
+
+@keyframes activityaminationprimary {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0px 0px 0px 5px $primary-03;
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+@keyframes activityaminationsecondary {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0px 0px 0px 5px  rgba(var(--secondary-rgb), 0.3);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+@keyframes activityaminationwarning {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0px 0px 0px 5px rgba(var(--warning-rgb), 0.3);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+@keyframes activityaminationdanger {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0px 0px 0px 5px rgba(var(--danger-rgb), 0.3);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+@keyframes activityaminationsuccess {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0px 0px 0px 5px rgba(var(--success-rgb), 0.3);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+@keyframes activityaminationinfo {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0px 0px 0px 5px rgba(var(--info-rgb), 0.3);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+@keyframes activityaminationorange {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0px 0px 0px 5px rgba(var(--orange-rgb), 0.3);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+.sub-text{
+  padding-block-end: 0.22rem;
+}
+.activity-content1 {
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color:$primary;
+    top: 8px;
+    inset-inline-start: -25px;
+    opacity: 1;
+    animation: activityaminationprimary 2s linear infinite;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 114%;
+    top: 20px;
+    inset-inline-start: -24px;
+    bottom: 10px;
+    background-color: $primary;
+    opacity: 0.3;
+  }
+}
+.activity-content2 {
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: $secondary;
+    top: 8px;
+    inset-inline-start: -25px;
+    opacity: 1;
+    animation: activityaminationsecondary 2s linear infinite;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 114%;
+    top: 20px;
+    inset-inline-start: -24px;
+    bottom: 10px;
+    background-color: $secondary;
+    opacity: 0.3;
+  }
+}
+.activity-content3 {
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: $warning;
+    top: 8px;
+    inset-inline-start: -25px;
+    opacity: 1;
+    animation: activityaminationwarning 2s linear infinite;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 114%;
+    top: 20px;
+    inset-inline-start: -24px;
+    bottom: 10px;
+    background-color: $warning;
+    opacity: 0.3;
+  }
+}
+.activity-content4 {
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: $danger;
+    top: 8px;
+    inset-inline-start: -25px;
+    opacity: 1;
+    animation: activityaminationdanger 2s linear infinite;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 114%;
+    top: 20px;
+    inset-inline-start: -24px;
+    bottom: 10px;
+    background-color: $danger;
+    opacity: 0.3;
+  }
+}
+.activity-content5 {
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: $success;
+    top: 8px;
+    inset-inline-start: -25px;
+    opacity: 1;
+    animation: activityaminationsuccess 2s linear infinite;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 114%;
+    top: 20px;
+    inset-inline-start: -24px;
+    bottom: 10px;
+    background-color: $success;
+    opacity: 0.3;
+  }
+}
+.activity-content6 {
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: $info;
+    top: 8px;
+    inset-inline-start: -25px;
+    opacity: 1;
+    animation: activityaminationinfo 2s linear infinite;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 114%;
+    top: 20px;
+    inset-inline-start: -24px;
+    bottom: 10px;
+    background-color: $info;
+    opacity: 0.3;
+  }
+}
+.activity-content7 {
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: $orange;
+    top: 8px;
+    inset-inline-start: -25px;
+    opacity: 1;
+    animation: activityaminationorange 2s linear infinite;
+  }
+}
+
+ul.tasks-all {
+  list-style: none;
+  padding-inline-start: 0px;
+
+  > li {
+    list-style: none;
+    margin-block-end: 25px;
+
+    &:last-child {
+      margin-block-end: 0px;
+    }
+  }
+}
+#salesChart{
+  .apexcharts-toolbar{
+      display: none;
+  }
+}
+/* End:: General Dashboard Styles */
+
+/* Start:: Ecormerce Dashboard Styles */
+
+#vmap circle:nth-child(1) {
+  fill: $primary;
+  stroke: $primary-03;
+  stroke-width: 30;
+}
+
+#vmap circle:nth-child(2) {
+  fill: $secondary;
+  stroke: rgba(var(--secondary-rgb), 0.2);
+  stroke-width: 30;
+}
+
+#vmap circle:nth-child(3) {
+  fill: $danger;
+  stroke: rgba(var(--danger-rgb), 0.2);
+  stroke-width: 30;
+}
+#vmap {
+  height: 255px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+/* End:: Ecormerce Dashboard Styles */
+
+/* Start:: Project Dashboard Styles */
+
+.recent-activity-1 {
+  > :not(:last-child).list-item {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: calc(100% - 24px);
+      border-inline-end: 1px dashed $default-border;
+      inset-block-start: 43px;
+      inset-inline-start: 20px;
+    }
+  }
+  li{
+     margin-block-end: 20px !important;
+  }
+}
+
+#projectReport,#revenueReport{
+  .apexcharts-toolbar{
+      display: none;
+  }
+}
+/* End:: Project Dashboard Styles */
+
+/* Start:: Crypto Dashboard Styles */
+#btcData,#ethData,#dashData,#glmData{
+  .apexcharts-grid{
+    display: none;
+  }
+}
+
+.btc-svg {
+  fill: $primary;
+}
+
+.eth-svg {
+  fill: $secondary;
+}
+
+.dash-svg {
+  fill: $warning;
+}
+
+.glm-svg {
+  fill: $success;
+}
+.market-info{
+  li:not(:last-child) {
+    margin-block-end: 17px !important;
+  }
+}
+/* End:: Crypto Dashboard Styles */
+
+/* Start:: Sales Dashboard Styles */
+.upcoming.list-unstyled li:not(:last-child) {
+  margin-block-end: 30px;
+}
+/* End:: Sales Dashboard Styles */

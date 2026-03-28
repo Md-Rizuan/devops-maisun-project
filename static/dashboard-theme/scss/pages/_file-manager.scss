@@ -1,0 +1,131 @@
+
+.main-nav-column {
+  flex-direction: column;
+
+  >.nav-item{
+    >.nav-link {
+      height: 35px;
+      font-size: 14px;
+      color:$default-text-color;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+  
+      >i {
+        font-size: 16px;
+        line-height: 0;
+        margin-inline-end: 10px;
+        transition: all 0.2s ease-in-out;
+  
+        &:not([class*=' tx-']) {
+          color: $gray-6;
+        }
+      }
+  
+      &.active {
+        position: relative;
+        background: $primary-02 !important;
+        color: $primary !important;
+        border-radius: 4px;
+  
+        >i{
+          color: $primary;
+        }
+      }
+  
+      &:not(.active):hover, &:not(.active):focus,
+      &:not(.active):hover span, &:not(.active):focus span,
+      &:not(.active):hover i, &:not(.active):focus i{
+        color: $primary;
+      }
+    }
+
+    + .nav-item{
+      margin-block-start: 5px;
+    }
+  }
+}
+.file-manager-icon {
+  position: relative;
+  height: 35px;
+}
+.svg-card .svg-upgrade {
+  transform: scale(1.6) translateY(10px);
+}
+.file-size {
+width: 40px;
+}
+
+.fm-sidebar {
+  .fm-timeline {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: calc(100% - 19px);
+      width: 2px;
+      background-color: $default-border;
+      inset-block-start: 13px;
+      inset-inline-start: 26px;
+    }
+
+    > li {
+      padding-inline-start: 40px;
+      position: relative;
+      margin-block-end: 30px;
+
+      .fm-timeline-icn {
+        position: absolute;
+        border-radius: 50%;
+        background-color: $light;
+        inset-block-start: -3px;
+        inset-inline-start: -7px;
+      }
+
+      .files-container {
+        border-radius: 4px;
+        position: relative;
+        overflow: hidden;
+        width: 21%;
+        img{
+          width: 100%;
+        }
+
+        + .files-container {
+          margin-inline-start: 5px;
+        }
+      }
+    }
+  }
+}
+.wd-15 {
+  width: 15px;
+}
+.masked-link {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  inset-block-start: 0px;
+  inset-inline-start: 0px;
+}
+.options-drop2 {
+  position: absolute;
+  height: 1rem;
+  inset-inline-end: 18px;
+  inset-block: 18px;
+}
+.options-drop {
+  position: absolute;
+  height: 1rem;
+  inset-inline-end: 0;
+}
+.star-icon {
+  position: absolute;
+  height: 1rem;
+  inset-inline-start: 18px;
+  inset-block: 18px;
+}
+img.file-manager-list {
+  border-radius: 0.25rem 0.25rem 0 0;
+}

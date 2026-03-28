@@ -1,0 +1,137 @@
+{% extends 'home/base.html' %}
+
+{% block title %} Home {% endblock %} | {{app_name}}
+
+{% block style %}
+
+<link rel="stylesheet" href="{{home_theme_server}}/css/index.css?v=1">
+  <style>
+    
+
+  </style>
+{% endblock %}
+
+
+{% block maincontent %}
+    <!-- Wrapper-->
+    <div class="wrapper">
+
+        {% include "home/index/hero.html" %}
+        {% include "home/index/about.html" %}
+        {% include "home/index/featured_video.html" %}
+        {% include "home/index/achievements.html" %}
+        {% include "home/index/collaboration.html" %}
+        {% include "home/index/books.html" %}
+        {% include "home/index/opinion.html" %}
+        {% include "home/index/testimonial.html" %}
+        {% include "home/index/contact.html" %}
+        
+
+    </div>
+    <!-- Wrapper end-->
+{% endblock %}
+
+{% block script %}
+  <script>
+    AOS.init({
+        duration: 1000,
+        easing: 'ease-out',
+        once: true,
+        offset: 100
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Add loading animation
+    window.addEventListener('load', function() {
+        document.body.style.opacity = '1';
+    });
+
+    // Intersection Observer for additional animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Observe content elements
+    document.querySelectorAll('.content-card, .contribution-item').forEach(el => {
+        observer.observe(el);
+    });
+    // Testimonial Swiper
+    let testimonialSwiper = new Swiper('.testimonial-swiper', {
+        slidesPerView: 1,
+        loop: true,
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.testimonial-next',
+            prevEl: '.testimonial-prev',
+        },
+    });
+
+    // Video Swiper
+    let videoSwiper = new Swiper(".videoSwiper", {
+        slidesPerView: 4,
+        spaceBetween: 20,
+        pagination: {
+        el: ".video-pagination",
+        clickable: true,
+        },
+        breakpoints: {
+        320: { slidesPerView: 1, spaceBetween: 10 },
+        768: { slidesPerView: 1, spaceBetween: 15 },
+        1024: { slidesPerView: 3, spaceBetween: 10 },
+        },
+    });
+
+  
+    $(".video-card").on("click", function(){
+        var videoUrl = $(this).data("video") + "?autoplay=1";
+        $("#videoFrame").attr("src", videoUrl);
+        $("#videoModal").modal("show");
+    });
+
+    $("#videoModal").on("hidden.bs.modal", function () {
+        $("#videoFrame").attr("src", "");
+    });
+
+    let bookSwiper = new Swiper(".bookSwiper", {
+        slidesPerView: 4,
+        spaceBetween: 20,
+        navigation: {
+            nextEl: ".book-next",
+            prevEl: ".book-prev",
+        },
+        pagination: {
+            el: ".book-pagination",
+            clickable: true,
+        },
+        watchOverflow: true,
+        breakpoints: {
+            320: { slidesPerView: 1, spaceBetween: 15 },
+            768: { slidesPerView: 2, spaceBetween: 20 },
+            1024: { slidesPerView: 4, spaceBetween: 20 },
+        }
+    });
+
+     
+
+  </script> 
+{% endblock %}

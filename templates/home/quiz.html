@@ -1,0 +1,217 @@
+{% extends 'home/base.html' %}
+
+{% block title %} Quiz {% endblock %} | {{app_name}}
+
+{% block style %}
+<link rel="stylesheet" href="{{home_theme_server}}/css/quiz.css?v=1">
+{% endblock %}
+
+{% block maincontent %}
+
+    <div class="wrapper  ">
+        <div class='quiz-bg-wrapper mt-2'>
+        </div>
+        <section class="quiz-section ">
+        
+            <div class="container">
+                <div class="quiz-container">
+                <h2 class="quiz-bg-text">Quiz</h2>
+                <h2 class="text-center mb-3 quiz-heading">
+                    Learn  <span class="text-accent">with me</span>
+                </h2><br><br>
+                {% if quiz %}
+                    <div class="quiz-header mt-2">
+                        <div>Required Time: 20 Minutes</div>
+                        <div id="result" class="result-box"></div>
+                        <div class="timer">Time Left: <span id="time">20:00</span></div>
+                    </div>
+
+                    <form id="quizForm">
+
+                        {% for item in quiz_questions %}
+                        <div class="question-block">
+                            <div class="question-title">
+                                Question {{forloop.counter}}:
+                            </div>
+                            <div class="mb-2">
+                                {{item.question.text}}
+                            </div>
+
+                            {% with q=item.question %}
+                            
+                            <div class="option-box">
+                                <label>
+                                    <input type="radio"
+                                        name="question_{{q.id}}"
+                                        value="A"
+                                        data-correct="{% if q.correct_answer == 'A' %}true{% else %}false{% endif %}">
+                                    <span class="option-label">A.</span> {{q.option_a}}
+                                </label>
+                                <span class="icon"></span>
+                            </div>
+
+                            <div class="option-box">
+                                <label>
+                                    <input type="radio"
+                                        name="question_{{q.id}}"
+                                        value="B"
+                                        data-correct="{% if q.correct_answer == 'B' %}true{% else %}false{% endif %}">
+                                    <span class="option-label">B.</span> {{q.option_b}}
+                                </label>
+                                <span class="icon"></span>
+                            </div>
+
+                            <div class="option-box">
+                                <label>
+                                    <input type="radio"
+                                        name="question_{{q.id}}"
+                                        value="C"
+                                        data-correct="{% if q.correct_answer == 'C' %}true{% else %}false{% endif %}">
+                                    <span class="option-label">C.</span> {{q.option_c}}
+                                </label>
+                                <span class="icon"></span>
+                            </div>
+
+                            <div class="option-box">
+                                <span class="option-label">A.</span>
+                                <span class="option-text">{{q.option_a}}</span>
+                            
+                                <input type="radio"
+                                    name="question_{{q.id}}"
+                                    value="D"
+                                    data-correct="{% if q.correct_answer == 'D' %}true{% else %}false{% endif %}">
+                            </div>
+                            
+
+                            {% endwith %}
+                        </div>
+                        {% endfor %}
+
+                        <button type="button" class="submit-btn" >Submit Answer</button>
+
+                    </form>
+
+                {% else %}
+                    <div class="alert alert-warning">
+                        No quiz available today.
+                    </div>
+                {% endif %}
+            </div>
+
+            </div>
+        </section>
+        
+    </div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+
+$(document).ready(function(){
+
+    let totalTime = 20 * 60;
+    let timerInterval;
+
+    function startTimer(){
+        timerInterval = setInterval(function(){
+
+            let minutes = Math.floor(totalTime / 60);
+            let seconds = totalTime % 60;
+
+            $("#time").text(
+                String(minutes).padStart(2,'0') + ":" +
+                String(seconds).padStart(2,'0')
+            );
+
+            totalTime--;
+
+            if(totalTime < 0){
+                clearInterval(timerInterval);
+                submitQuiz();
+            }
+
+        }, 1000);
+    }
+
+    startTimer();
+
+ 
+    $(document).on("click", ".option-box", function(){
+
+        if($(this).hasClass("disabled")) return;
+
+        let radio = $(this).find("input");
+        let question = radio.attr("name");
+
+        $(`input[name="${question}"]`)
+            .closest(".option-box")
+            .removeClass("selected");
+
+        $(this).addClass("selected");
+        radio.prop("checked", true);
+    });
+
+    
+    $(".submit-btn").on("click", function(){
+        submitQuiz();
+
+    });
+
+
+    function submitQuiz(){
+
+        clearInterval(timerInterval);
+
+        let score = 0;
+        let totalQuestions = $(".question-block").length;
+
+        $(".question-block").each(function(){
+
+            let block = $(this);
+            let selected = block.find("input:checked");
+        
+            block.find(".option-box").each(function(){
+        
+                let optionBox = $(this);
+                let input = optionBox.find("input");
+        
+                optionBox.find(".icon").remove();
+        
+                if(input.data("correct") === true){
+                    optionBox.addClass("correct");
+                    optionBox.append('<span class="icon correct-icon">✔</span>');
+                }
+        
+                if(selected.length &&
+                   input.is(":checked") &&
+                   input.data("correct") !== true){
+        
+                    optionBox.addClass("wrong");
+                    optionBox.append('<span class="icon wrong-icon">✖</span>');
+                }
+        
+                input.prop("disabled", true);
+                optionBox.addClass("disabled");
+            });
+        
+            if(selected.length && selected.data("correct") === true){
+                score++;
+            }
+            $(".submit-btn").hide();
+            $('html, body').animate({
+                scrollTop: $(".quiz-header").offset().top - 180
+            }, 300);
+        });
+        
+        $("#result").html(
+            "Total Marks: " + score + " / " + totalQuestions
+        );
+
+    }
+
+});
+
+</script>
+{% endblock %}
+
