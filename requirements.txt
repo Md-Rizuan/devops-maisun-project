@@ -9,3 +9,4 @@ django-environ==0.8.1
 # Install psycopg2-binary==2.9.9 if psycopg==3.2.3 is causing errors.
 psycopg==3.2.3
 setuptools==65.5.0
+gunicorn

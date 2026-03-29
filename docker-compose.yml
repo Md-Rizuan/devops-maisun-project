@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: maisun_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    command: gunicorn maisun-world.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+    expose:
+      - "8000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_NAME=maisun_db
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=123456d
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - .:/app
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
