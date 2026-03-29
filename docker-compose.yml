@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     image: postgres:15
@@ -13,7 +11,7 @@ services:
 
   web:
     build: .
-    command: gunicorn maisun-world.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn maisun_site.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/app
     expose:
@@ -23,7 +21,7 @@ services:
     environment:
       - DATABASE_NAME=maisun_db
       - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=123456d
+      - DATABASE_PASSWORD=123456
       - DATABASE_HOST=db
       - DATABASE_PORT=5432
 
